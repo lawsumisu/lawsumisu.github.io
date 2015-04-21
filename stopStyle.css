@@ -1,0 +1,66 @@
+.runningLabel {
+  font-size: large;
+}
+
+.valueLabel {
+  font-size: x-large;
+}
+
+#overallInfoTable td {
+  vertical-align: text-bottom;
+  padding: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#overallInfoTable {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.headingRow {
+  background-color: #EEEEEE;
+}
+
+.behindRow {
+  background-color: rgb(227,163,163);
+}
+
+.aheadRow {
+  background-color: rgb(153,222,126);
+}
+
+#tableDisplay {
+  height:300px;
+  overflow: auto;
+  margin-top: 5px;
+}
+
+#graphDisplay {
+  height: 300px;
+}
+
+#splitTable td, th {
+  text-align: center;
+}
+
+#splitTable {
+  margin-bottom: 0px;
+}
+
+#leftButton, #exitButton {
+  width: 30%;
+}
+
+#exitButton {
+  float: right;
+}
+
+.container {
+  margin-top: 15px;
+}
+
+#content {
+  position: fixed;
+  bottom: 0px;
+}

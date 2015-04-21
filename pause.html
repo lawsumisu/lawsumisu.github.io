@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<!--
+  GR4 stuff
+
+  //ask user to set sleep on phone to 30 min 
+  //
+-->
+<html>
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<!-- Load style sheets -->
+
+<link rel="stylesheet" type="text/css" href="running.css" />
+<!-- Load any supplemental Javascript libraries here -->
+<script type="text/javascript" src="external_js/jquery-1.11.2.min.js"></script>
+<link href="external_js/bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet">
+
+<script type="text/javascript" src="external_js/bootstrap-3.3.4-dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="handlebars-v3.0.0.js"></script>
+
+<script type="text/javascript" src="scroller.js"></script>
+<link rel="stylesheet" type="text/css" href="scroller.css" />
+<script type="text/javascript">
+$(document).ready(function() {
+    setup();
+  });
+
+
+    //control listener 
+
+    $(window).on("go", function(e) {
+          console.log("in pause event");
+          console.log("go to pause page");
+          location.href="running.html";
+    }); 
+
+    $(window).on("stop", function(e) {
+          console.log("in pause event");
+          console.log("go to pause page");
+          location.href="stop.html";
+    }); 
+
+    
+
+</script>
+
+
+</head>
+
+	<body>
+
+  <!-- pause screen components --> 
+  <h1 id = "pauseLabel1">27:46:11</h1>
+  <h1 id = "pauseLabel2">01:03:11</h1>
+  <h1 id = "pauseLabel3">+00:48:00</h1>
+  <h1 id = "pauseLabel4">5.1 mi</h1>
+  <h1 id = "pauseLabel5">2.5 mi</h1> 
+
+    <div id = "content">
+    <canvas id="scrollBG" width = "200" height = "75"></canvas>
+    <canvas id="scrollFG" width = "200" height = "75"></canvas>
+  </div>
+
+
+ 
+</html>

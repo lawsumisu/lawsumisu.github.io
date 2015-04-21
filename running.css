@@ -1,0 +1,85 @@
+﻿h1 {
+	font-size: 500%;
+	text-align: center;
+}
+
+canvas {
+	text-align: center;
+}
+
+#timeHeading, #distanceFooter {
+	font-size: 4em;
+	text-align: center;
+}
+
+
+/*media queries*/ 
+/*@media only screen and (max-device-width: 667px) {
+	h1 {
+		font-size: 15em;
+		text-align: center;
+	}
+
+	#timeHeading {
+		font-size: 20em;
+	}
+	
+}*/
+
+.carousel {
+    height: 100px;
+    margin-bottom: 20px;
+    /*display: none;*/
+    visibility: hidden;
+}
+
+.carousel .item {
+    width: 100%;
+    height: 100px;
+    background-color: white;
+};
+
+.carousel-control {
+  background-image:none;
+}
+
+#leftControl, #rightControl, #leftControl2, #rightControl2 {
+	background-image: none; 
+}
+
+.glyphicon-chevron-left, .glyphicon-chevron-right {
+	color: black;
+}
+
+
+#arrow {
+	display: none;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#arrow2 {
+	display: none;
+	margin-left: 25%;
+	margin-right: 25%;
+}
+
+#content {
+	outline: none;
+}
+
+.pauseLabel {
+	font-size: 380%; 
+	text-align: center;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.deficit {
+	color: red;
+}
+
+.btn {
+	outline: 2px solid gray;
+	background-color: #DCDCDC;
+}

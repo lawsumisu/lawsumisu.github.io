@@ -1,0 +1,76 @@
+h1 {
+  font-size: 35vw;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 800;
+}
+
+.green {
+  color: #99DE7E;
+}
+
+/*
+.gray {
+  color: #DDDDDD;
+}
+*/
+
+h2 {
+  font-size: 20vw;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 800;
+}
+
+button {
+  background-color: #D3D3D3;
+  outline: 2px solid gray;
+}
+
+.tophalf {
+  margin-top: 30%;
+  margin-bottom: 30%;
+  text-align: center;
+}
+.buttonspacer {
+  margin-top: 10%;
+}
+
+.buttontop {
+  margin-top:13%;
+}
+
+.buttonbottom {
+  margin-top: 75%;
+  padding-bottom: 10%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.buttonselect {
+  background-color: #99DE7E;
+}
+
+.toplogo {
+  margin-top:5%;
+  margin-bottom:5%;
+  text-align: center;
+}     
+
+input {
+  width: 30%;
+  text-align:right;
+  margin-right:3px;
+  margin-left:6px;
+}
+
+#forwardbtn, #backbtn {
+  width: 30%;
+  /*position: fixed;*/
+}
+
+#forwardbtn {
+  float: right;
+}
+
+.container {
+  margin-top: 15px;
+}

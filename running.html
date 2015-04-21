@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<!--
+  GR4 stuff
+
+  //ask user to set sleep on phone to 30 min 
+  //
+
+  //citations: Consulted stack overflow
+  image from: http://healthfitnessrevolution.com/little-tips-to-perfect-your-running-technique/
+-->
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Load style sheets -->
+    <link rel="stylesheet" type="text/css" href="running.css" />
+    <link rel="stylesheet" type="text/css" href="scroller.css" />
+    <link rel="stylesheet" type="text/css" href="stopStyle.css" />
+    <link rel="stylesheet" type="text/css" href="external_js/bootstrap-3.3.4-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="external_js/bootstrap-3.3.4-dist/css/bootstrap-flat.min.css" />
+    <style type="text/css">
+      #runningScreen, #stopScreen {
+        display: none;
+      }
+
+      .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>th, .table>tbody>tr>td, .table>tfoot>tr>td, .table>thead>tr>td  {
+        border-top: none;
+        width: 25%;
+      }
+
+      .nav-tabs > li {
+        float: none;
+        display: inline-block;
+      }
+
+      .nav-tabs {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="runningScreen">
+      <div id="carousel" class="carousel slide" data-ride="carousel" data-interval="false">
+        
+        <div class="carousel-inner">
+            
+            <div class="item active">
+                <h1 id = "timeHeading">27:46:11</h1> 
+            </div>
+            <div class="item">
+                <h1 id = "timeHeading">01:03:11</h1> 
+            </div>
+            <div class="item">
+                <h1 id = "timeHeading"><span class = "deficit">+00:48:00</span></h1> 
+            </div>
+        </div> 
+       
+        <a href="#carousel" id = "leftControl" class="left carousel-control" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a href="#carousel" id = "rightControl" class="right carousel-control" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      </div>
+
+      <!-- arrow for GR5 --> 
+      <!-- <canvas id="canvas" width="1400" height="500" ></canvas> -->
+
+      <!-- first large arrow for the minimal screen --> 
+
+    <div id = "arrows"> 
+      <img src='arrow.png' id='arrow' alt='HTML5 Icon' width='300' height='250'>
+
+      <!-- second small arrow for the full screen --> 
+      <img src='arrow.png' id='arrow2' alt='HTML5 Icon' width='140' height='120'>
+    </div> 
+      
+      <!-- <h2 id = "accData"></h2> --> 
+      <!-- <h1>2.5 mi</h1> --> 
+       
+
+      <div id="carousel2" class="carousel slide" data-ride="carousel" data-interval="false">
+        
+        <div class="carousel-inner">
+            
+            <div class="item active">
+                <h2 id = "distanceFooter">5.1 mi</h2>
+            </div>
+            <div class="item">
+                <h2 id = "distanceFooter">2.5 mi</h2>
+            </div>
+        </div> 
+        <a href="#carousel2" id = "leftControl2" class="left carousel-control" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a href="#carousel2" id = "rightControl2" class="right carousel-control" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      </div>
+    </div>
+
+    <div id = "pauseScreen">
+      <h3 id = "pauseLabel1" class = "pauseLabel">27:46:11</h3>
+      <h3 id = "pauseLabel2" class = "pauseLabel">01:03:11</h3>
+      <h3 id = "pauseLabel3" class = "pauseLabel"><span class = "deficit">+00:48:00</span></h3>
+      <h3 id = "pauseLabel4" class = "pauseLabel">5.1 mi</h3>
+      <h3 id = "pauseLabel5" class = "pauseLabel">2.5 mi</h3>
+    </div>
+
+    <div id="stopScreen">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <button class="btn btn-lg" id="leftButton"></button>
+            <button class="btn btn-lg" id="exitButton" onclick="location.href='index.html'">Exit</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <table class="table" id="overallInfoTable">
+              <col width="50%">
+              <col width="50%">
+              <tr>
+                <td class="runningLabel text-left">Total Distance</td>
+                <td class="valueLabel text-right"><span id="totalDistLabel"></span> mi</td>
+              </tr>
+              <tr>
+                <td class="runningLabel text-left">Total Time</td>
+                <td class="valueLabel text-right"><span id="totalTimeLabel"></span></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      
+        <div class="row">
+          <div class="col-xs-12">
+            <div role="tabpanel">
+              <ul id="tabs" class="nav nav-tabs" role="tablist">
+                <li role="presentation"><a href="#graphDisplay" aria-controls="graph" role="tab" data-toggle="tab">Graph</a></li>
+                <li role="presentation"><a href="#tableDisplay" aria-controls="table" role="tab" data-toggle="tab">Table</a></li>
+              </ul>
+
+              <div class="tab-content" id="tabContentContainer">
+                <div role="tabpanel" class="tab-pane" id="graphDisplay"></div>
+                <div role="tabpanel" class="tab-pane" id="tableDisplay">
+                  <table id="splitTable" class="table">
+                    <tr>
+                      <th>Split Number</th>
+                      <th>Overall Distance</th>
+                      <th>Split Time</th>
+                      <th>Time Differential</th>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <div id = "content">
+      <canvas id="scrollBG" width = "200" height = "75"></canvas>
+      <canvas id="scrollFG" width = "200" height = "75"></canvas>
+    </div>
+
+
+    <!-- Load any supplemental Javascript libraries here -->
+    <script type="text/javascript" src="external_js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="external_js/bootstrap-3.3.4-dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="scroller.js"></script>
+    <script type="text/javascript" src="external_js/highcharts.js"></script>
+    <script type="text/javascript" src="runs.js"></script>
+    <script type="text/javascript" src="stop.js"></script>
+    <script type="text/javascript">
+      //resizing pictures of arrows
+      document.getElementById("arrow").style.width = $(window).width().toString() + "px"; 
+      document.getElementById("arrow").style.height = ($(window).width() - 50).toString() + "px"; 
+
+      document.getElementById("arrow2").style.width = (($(window).width())/2.0).toString() + "px"; 
+      document.getElementById("arrow2").style.height = ((($(window).width())/2.0) - 20).toString() + "px"; 
+
+      var url = location.href;
+      var type = getParam(url, "type");
+      var num = getParam(url, "run");
+      var runningData = runs[num];
+
+      $('#totalDistLabel').text(runningData.distance[runningData.distance.length-1]);
+      var finalTime = runningData.time[runningData.time.length-1];
+      var minutes = Math.floor(finalTime/60);
+      var seconds = finalTime % 60;
+      $('#totalTimeLabel').text(minutes + ":" + ('0' + seconds).slice(-2));
+      
+      loadPacingData();
+
+      if (type=="save") {
+        $("#content").css("display", "block");
+        setup("go");
+
+        document.getElementById("carousel").style.visibility = "visible"; 
+        document.getElementById("carousel2").style.visibility = "visible";
+        document.getElementById("content").style.visibility = "visible"; 
+        document.getElementById("arrow2").style.display = "inline";  
+        document.getElementById("arrow").style.display = "none"; 
+
+        showGoScreen();
+      }
+      else {
+        $("#content").css("display", "none");
+
+        showReviewScreen();
+      }
+
+      function getParam(url, name) {
+        var regexS = "[\\?&]"+name+"=([^&#]*)";
+        var regex = new RegExp( regexS );
+        var results = regex.exec( url );
+        if (results) {
+          return results[1];
+        }
+        else {
+          return null;
+        }
+      }
+
+      //access gyroscope data 
+      if(window.DeviceMotionEvent){
+          window.addEventListener('deviceorientation', function(event) {
+            var alpha = event.alpha;
+            var beta = event.beta;
+            var gamma = event.gamma;
+
+            if ((beta > -80 && beta <= -50)) {
+              $("#runningScreen").css("display", "block");
+              $("#stopScreen").css("display", "none");
+              $("#pauseScreen").css("display", "none");
+              setup("go"); 
+
+              document.getElementById("carousel").style.visibility = "hidden"; 
+              document.getElementById("carousel2").style.visibility = "hidden"; 
+              document.getElementById("content").style.visibility = "hidden"; 
+              document.getElementById("arrow2").style.display = "none"; 
+              document.getElementById("arrow").style.display = "inline"; 
+            } 
+            else if ((beta > -60 && beta <= -20)) {
+
+              $("#runningScreen").css("display", "block");
+              $("#stopScreen").css("display", "none");
+              $("#pauseScreen").css("display", "none");
+              setup("go"); 
+
+
+              document.getElementById("carousel").style.visibility = "visible"; 
+              document.getElementById("carousel2").style.visibility = "visible"; 
+              document.getElementById("content").style.visibility = "hidden"; 
+              document.getElementById("arrow2").style.display = "none"; 
+              document.getElementById("arrow").style.display = "inline";  
+            } 
+            else if ((beta > -50 && beta <= 0)) {
+              document.getElementById("carousel").style.visibility = "visible"; 
+              document.getElementById("carousel2").style.visibility = "visible";
+              document.getElementById("content").style.visibility = "visible"; 
+              document.getElementById("arrow2").style.display = "inline";  
+              document.getElementById("arrow").style.display = "none"; 
+            } 
+            else {
+            }
+            
+            //document.getElementById("accData").innerHTML = alpha.toString() + " " + beta.toString() + " " + gamma.toString();  
+        }, false);
+      } else {  
+          console.log("Device does not support gyroscope data access.");
+      }
+
+      //prevent carousel from auto-sliding 
+
+      $('.carousel').carousel({
+        pause: true,
+        interval: false
+      });
+
+      $('.carousel').show(); 
+
+      //control listener 
+
+      function showGoScreen() {
+        $("#runningScreen").css("display", "block");
+        $("#stopScreen").css("display", "none");
+        $("#pauseScreen").css("display", "none");
+
+        console.log("showing go screen");
+      }
+
+      function showPauseScreen() {
+        $("#runningScreen").css("display", "none");
+        $("#stopScreen").css("display", "none");
+        $("#pauseScreen").css("display", "block");
+
+        console.log("showing pause screen");
+      };
+
+      //not sure what the difference between showStopScreen() and showReviewScreen() is. 
+
+      function showStopScreen() {
+        $("#runningScreen").css("display", "none");
+        $("#pauseScreen").css("display", "none");
+        $("#stopScreen").css("display", "block");
+        
+
+        $("#leftButton").text("Save & Exit");
+        $("#leftButton").css("width","50%");
+        $("#leftButton").click(function() {
+          if (type == "save") {
+            var currentView = window.name.split("&");
+            currentView[0] = true;
+            window.name = currentView.join("&");
+            location.href = "index.html";
+          }
+        });
+
+        console.log("showing stop screen");
+
+        var height = $("#scrollBG").offset().top - ($("#tabs").offset().top + $("#tabs").height());
+        $("#tableDisplay").css("height", height);
+        $("#graphDisplay").css("height", height);
+
+        $('a[href="#graphDisplay"]').tab('show');
+        loadGraph();
+      }
+
+      function showReviewScreen() {
+        $("#runningScreen").css("display", "none");
+        $("#stopScreen").css("display", "block");
+        $("#pauseScreen").css("display", "none");
+
+        $("#leftButton").text("Back");
+        $("#leftButton").click(function() {
+          location.href="review.html";
+        });
+
+        console.log("showing review screen");
+
+        var height = $(window).height() - ($("#tabs").offset().top + $("#tabs").height()) - 30;
+        $("#tableDisplay").css("height", height);
+        $("#graphDisplay").css("height", height);
+
+        $('a[href="#graphDisplay"]').tab('show');
+        loadGraph();
+      }
+    </script>
+  </body>
+</html>
