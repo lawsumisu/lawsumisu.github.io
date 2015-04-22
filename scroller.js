@@ -48,6 +48,7 @@ var setup = function(state){
 	//Setup stopwatch
 	stopwatch = new Stopwatch();
 	setInterval(function(){stopwatch.update();}, 10);
+	stopwatch.update();
 }
 
 /**
