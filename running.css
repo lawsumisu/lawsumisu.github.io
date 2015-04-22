@@ -7,7 +7,7 @@ canvas {
 	text-align: center;
 }
 
-#timeHeading, #distanceFooter {
+.item {
 	font-size: 4em;
 	text-align: center;
 }

@@ -4,6 +4,7 @@ var scrollT = 0;
 var cachedWidth = 0;
 var cachedHeight = 0;
 var currentState = "";
+var stopwatch = null;
 /**
  * Sets up the scroll bar and thumb.
  */
@@ -43,6 +44,10 @@ var setup = function(state){
 			setup(currentState);
 		}	
 	});
+
+	//Setup stopwatch
+	stopwatch = new Stopwatch();
+	setInterval(function(){stopwatch.update();}, 10);
 }
 
 /**
@@ -347,12 +352,15 @@ var createEvent = function(t){
 		//console.log(currentState);
 
 		if (eventName == "go") {
+			stopwatch.go();
 			showGoScreen();
 		}
 		else if (eventName == "pause") {
+			stopwatch.pause();
 			showPauseScreen();
 		}
 		else if (eventName == "stop") {
+			stopwatch.pause();
 			showStopScreen();
 		}
 	}
@@ -455,4 +463,47 @@ var Pixel = function(r, g, b, a){
 	this.g = g;
 	this.b = b;
 	this.a = a;
+}
+
+
+var Stopwatch  = function(){
+
+	var startTime = new Date().getTime();
+	var pauseTime = 0;
+	var pause = false;
+	var previousT = startTime;
+	
+
+	var zeroPad = function(n, width){
+		ns = n + '';
+  		return ns.length >= width ? ns : new Array(width - ns.length + 1).join("0") + ns;
+	}
+
+	this.elapsedTime = function(){
+		var t = new Date().getTime();
+		if (pause){
+			pauseTime += t - previousT;		
+		}
+		previousT = t;
+		return t - startTime - pauseTime;
+	}
+
+	this.pause = function(){
+		pause = true;
+		
+	}
+
+	this.go = function(){
+		pause = false;
+	}
+
+	this.update = function(){
+		var hs = Math.floor(this.elapsedTime()/10);
+		var s = Math.floor(hs/100);
+		var min = Math.floor(s/60);
+		var time = "";
+		time += zeroPad(min, 2) +":" + zeroPad(s%60, 2) + ":" + zeroPad(hs%100, 2);
+		$("#fullTime").text(time);
+		$("#pauseLabel1").text(time);
+	}
 }
