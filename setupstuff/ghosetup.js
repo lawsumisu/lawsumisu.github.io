@@ -170,7 +170,7 @@ $("#pacebtn").on('click',function(){
 });
 
 function paceDone(){
-	$("#pace")[0].value = SpinningWheel.getSelectedValues().values.join().replace(/,/g, '');
+	$("#pace")[0].value = SpinningWheel.getSelectedValues().values[0]*60 + Number(SpinningWheel.getSelectedValues().values[2]);
 	//$("#forwardbtn").focus();
 }
 

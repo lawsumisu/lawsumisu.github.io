@@ -503,8 +503,41 @@ var Stopwatch  = function(){
 		var s = Math.floor(hs/100);
 		var min = Math.floor(s/60);
 		var time = "";
-		time += zeroPad(min, 2) +":" + zeroPad(s%60, 2) + ":" + zeroPad(hs%100, 2);
+		time += zeroPad(min, 2) +":" + zeroPad(s%60, 2) + "." + zeroPad(hs%100, 2);
 		$("#fullTime").text(time);
 		$("#pauseLabel1").text(time);
+
+		var stats = getCurrentStats(this.elapsedTime()/1000);
+		var distanceStr = (stats.distance).toFixed(2) + " mi";
+		var splitDistStr;
+		if (!stats.splitDistance) {
+			splitDistStr = "none";
+		}
+		else {
+			splitDistStr = (stats.splitDistance).toFixed(2) + " mi";
+		}
+		var splitTimeStr;
+		if (!stats.splitTime) {
+			splitTimeStr = "none";
+		}
+		else {
+			splitTimeStr = formatTime(stats.splitTime);
+		}
+		var diffStr;
+		if (!stats.pacingDiff) {
+			diffStr = "none";
+		}
+		else {
+			diffStr = getDifferentialGivenDiff(stats.pacingDiff);
+		}
+
+		$("#splitTime").text(splitTimeStr);
+		$("#pauseLabel2").text(splitTimeStr);
+		$("#timeDiff").text(diffStr);
+		$("#pauseLabel3").text(diffStr);
+		$("#fullDist").text(distanceStr);
+		$("#pauseLabel4").text(distanceStr);
+		$("#splitDist").text(splitDistStr);
+		$("#pauseLabel5").text(splitDistStr);
 	}
 }

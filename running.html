@@ -51,10 +51,11 @@
                 <h1 id = "fullTime">27:46:11</h1> 
             </div>
             <div class="item">
-                <h1 id = "timeHeading">01:03:11</h1> 
+                <h1 id = "splitTime">01:03:11</h1> 
             </div>
             <div class="item">
-                <h1 id = "timeHeading"><span class = "deficit">+00:48:00</span></h1> 
+                <h1 id = "timeDiff">+00:48:00</h1> 
+                <!--<h1 id = "timeDiff"><span class = "deficit">+00:48:00</span></h1> -->
             </div>
         </div> 
        
@@ -87,10 +88,10 @@
         <div class="carousel-inner">
             
             <div class="item active">
-                <h2 id = "distanceFooter">5.1 mi</h2>
+                <h2 id = "fullDist">5.1 mi</h2>
             </div>
             <div class="item">
-                <h2 id = "distanceFooter">2.5 mi</h2>
+                <h2 id = "splitDist">2.5 mi</h2>
             </div>
         </div> 
         <a href="#carousel2" id = "leftControl2" class="left carousel-control" data-slide="prev">
@@ -105,7 +106,8 @@
     <div id = "pauseScreen">
       <h3 id = "pauseLabel1" class = "pauseLabel">27:46:11</h3>
       <h3 id = "pauseLabel2" class = "pauseLabel">01:03:11</h3>
-      <h3 id = "pauseLabel3" class = "pauseLabel"><span class = "deficit">+00:48:00</span></h3>
+      <h3 id = "pauseLabel3" class = "pauseLabel">+00:48:00</h3>
+      <!--<h3 id = "pauseLabel3" class = "pauseLabel"><span class = "deficit">+00:48:00</span></h3>-->
       <h3 id = "pauseLabel4" class = "pauseLabel">5.1 mi</h3>
       <h3 id = "pauseLabel5" class = "pauseLabel">2.5 mi</h3>
     </div>
@@ -188,15 +190,25 @@
       var url = location.href;
       var type = getParam(url, "type");
       var num = getParam(url, "run");
-      var runningData = runs[num];
 
-      $('#totalDistLabel').text(runningData.distance[runningData.distance.length-1]);
-      var finalTime = runningData.time[runningData.time.length-1];
-      var minutes = Math.floor(finalTime/60);
-      var seconds = finalTime % 60;
-      $('#totalTimeLabel').text(minutes + ":" + ('0' + seconds).slice(-2));
-      
-      loadPacingData();
+      var split = getParam(url, "split"); //distance (in miles, may be a decimal)
+      if (split == "") {
+        split = null;
+      }
+      else {
+        split = Number(split);
+      }
+      var pace = getParam(url, "pace");   //seconds
+      if (pace == "") {
+        pace = null;
+      }
+      else {
+        pace = Number(pace);
+      }
+
+      if (num == 0) {
+        customizeRecordedRun(split, pace);
+      }
 
       if (type=="save") {
         $("#content").css("display", "block");
@@ -217,7 +229,7 @@
       }
 
       function getParam(url, name) {
-        var regexS = "[\\?&]"+name+"=([^&#]*)";
+        var regexS = "[\\?&#]"+name+"=([^&#]*)";
         var regex = new RegExp( regexS );
         var results = regex.exec( url );
         if (results) {
@@ -314,16 +326,19 @@
 
         $("#leftButton").text("Save & Exit");
         $("#leftButton").css("width","50%");
-        $("#leftButton").click(function() {
+        $("#leftButton").off().click(function() {
           if (type == "save") {
             var currentView = window.name.split("&");
-            currentView[0] = true;
+            currentView.push(split);
+            currentView.push(pace);
+            currentView.push(stopwatch.elapsedTime()/1000);
             window.name = currentView.join("&");
             location.href = "index.html";
           }
         });
 
         console.log("showing stop screen");
+        loadPacingData();
 
         var height = $("#scrollBG").offset().top - ($("#tabs").offset().top + $("#tabs").height());
         $("#tableDisplay").css("height", height);
@@ -344,6 +359,7 @@
         });
 
         console.log("showing review screen");
+        loadPacingData();
 
         var height = $(window).height() - ($("#tabs").offset().top + $("#tabs").height()) - 30;
         $("#tableDisplay").css("height", height);

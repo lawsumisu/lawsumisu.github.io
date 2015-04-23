@@ -85,23 +85,48 @@
         for (var i=runs.length-1; i>=0; i--) {
           if (currentView[i] == 'true') {
             var run = runs[i];
-
-            var row = runTable.insertRow(0);
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-
-            var val = run.time[run.time.length-1];
-            var min = Math.floor(val/60);
-            var sec = val % 60;
-            var timeStr = min + ":" + ('0' + sec).slice(-2);
-
-            $(cell1).append($('<button class="btn btn-color" style="width:100%" onclick="location.href=sendToStop(' + i + ')"></button>').html('<span class="date">' + run.date + '</span><span class="specs">' + run.distance[run.distance.length-1] + " mi / " + timeStr + '</span>'));
-
-            $(cell2).append($('<button class="btn btn-lg" style="float: right" onclick="deleteRun(' + i + ')"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'));
-
-            $(":button").css("height", $(window).height()/12);
+            addToTable(run, i);
           }
         }
+
+        for (var i=5; i<currentView.length; i+=3) {
+          var reviewSplit = currentView[i];
+          if (reviewSplit == "") {
+            reviewSplit = null;
+          }
+          else {
+            reviewSplit = Number(reviewSplit);
+          }
+
+          var reviewPace = currentView[i+1];
+          if (reviewPace == "") {
+            reviewPace = null;
+          }
+          else {
+            reviewPace = Number(reviewPace);
+          }
+
+          customizeRecordedRun(reviewSplit, reviewPace);
+          var run = getCurrentRunZero(Number(currentView[i+2]), reviewSplit);
+          addToTable(run, i);
+        }
+      }
+
+      function addToTable(run, i) {
+        var row = runTable.insertRow(0);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+
+        var val = run.time[run.time.length-1];
+        var min = Math.floor(val/60);
+        var sec = Math.round(val % 60);
+        var timeStr = min + ":" + ('0' + sec).slice(-2);
+
+        $(cell1).append($('<button class="btn btn-color" style="width:100%" onclick="location.href=sendToStop(' + i + ')"></button>').html('<span class="date">' + run.date + '</span><span class="specs">' + (run.distance[run.distance.length-1]).toFixed(2) + " mi / " + timeStr + '</span>'));
+
+        $(cell2).append($('<button class="btn btn-lg" style="float: right" onclick="deleteRun(' + i + ')"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'));
+
+        $(":button").css("height", $(window).height()/12);
       }
 
       function sendToStop(index) {
@@ -109,7 +134,12 @@
       }
 
       function deleteRun(index) {
-        currentView[index] = false;
+        if (index >= runs.length) {
+          currentView.splice(index,3);
+        }
+        else {
+          currentView[index] = false;
+        }
         window.name = currentView.join("&");
         drawTable();
       }

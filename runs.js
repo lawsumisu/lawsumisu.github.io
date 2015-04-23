@@ -1,11 +1,125 @@
-var run0 = {
-  split: 0.25, 
-  distance: [0,0.25,0.5,0.75,1,1.25,1.5,1.75,2,2.25,2.5,2.75,3,3.25,3.5,3.75,4,4.25,4.5,4.75,5,5.25,5.5,5.75,6,6.25,6.3], 
-  time: [0,135,262,372,486,596,715,825,942,1049,1161,1269,1381,1479,1584,1708,1830,1965,2087,2229,2364,2483,2626,2776,2936,3101,3143], 
-  pacing: [0,120,240,360,480,600,720,840,960,1080,1200,1320,1440,1560,1680,1800,1920,2040,2160,2280,2400,2520,2640,2760,2880,3000,3024]
-};
-var d = new Date();
-run0.date = (d.getMonth()+1) + "/" + d.getDate() + "/" + d.getFullYear().toString().substring(2);
+var recordedDist = [0,0.25,0.5,0.75,1,1.25,1.5,1.75,2,2.25,2.5,2.75,3,3.25,3.5,3.75,4,4.25,4.5,4.75,5,5.25,5.5,5.75,6,6.25];
+var recordedTime = [0,135,262,372,486,596,715,825,942,1049,1161,1269,1381,1479,1584,1708,1830,1965,2087,2229,2364,2483,2626,2776,2936,3101];
+
+var run0 = new Object();
+
+function customizeRecordedRun(split, pacing) {
+  run0.split = split;
+
+  if (!split) {
+    run0.distance = recordedDist;
+    run0.distance.push(6.5);
+    run0.time = recordedTime;
+    run0.time.push(3236);
+  }
+  else {
+    run0.distance = [];
+    var totalDist = recordedDist[recordedDist.length-1];
+    for (var i=0; i<=totalDist/split; i++) {
+      run0.distance.push(split*i);
+    }
+
+    run0.time = [];
+    for (var i=0; i<run0.distance.length; i++) {
+      run0.time.push(interpolate(run0.distance[i], recordedDist, recordedTime));
+    }
+
+    var disLength = run0.distance.length;
+    run0.distance.push(2*run0.distance[disLength-1] - run0.distance[disLength-2]);
+    run0.time.push(2*run0.time[disLength-1] - run0.time[disLength-2]);
+  }
+
+  run0.pacing = [];
+  if (pacing) {
+    for (var i=0; i<run0.time.length; i++) {
+      run0.pacing.push(pacing*(i));
+    }
+  }
+}
+
+function getCurrentRunZero(time, currentSplit) {
+  modifiedZeroRun = new Object();
+  var finalDist = interpolate(time, run0.time, run0.distance);
+
+/*  if (currentSplit === null) {
+    currentSplit = run0.distance[1]-run0.distance[0];
+  }
+  */
+  modifiedZeroRun.split = currentSplit;
+  if (!currentSplit) {
+    currentSplit = 0.25;
+  }
+
+  modifiedZeroRun.distance = [];
+  for (var i=0; i<finalDist/currentSplit; i++) {
+    modifiedZeroRun.distance.push(i*currentSplit);
+  }
+  modifiedZeroRun.distance.push(finalDist);
+
+  modifiedZeroRun.time = [];
+  for (var i=0; i<modifiedZeroRun.distance.length; i++) {
+    modifiedZeroRun.time.push(interpolate(modifiedZeroRun.distance[i], run0.distance, run0.time));
+  }
+
+  modifiedZeroRun.pacing = [];
+  if (run0.pacing.length > 0) {
+    for (var i=0; i<modifiedZeroRun.distance.length; i++) {
+      modifiedZeroRun.pacing.push(interpolate(modifiedZeroRun.distance[i], run0.distance, run0.pacing));
+    }
+  }
+
+  var d = new Date();
+  modifiedZeroRun.date = (d.getMonth()+1) + "/" + d.getDate() + "/" + d.getFullYear().toString().substring(2);
+
+  return modifiedZeroRun;
+}
+
+//passes back object with following parameters; they are null if invalid
+//  distance
+//  splitDistance
+//  splitTime
+//  pacingDiff
+function getCurrentStats(time) {
+  var stats = new Object();
+
+  stats.distance = interpolate(time, run0.time, run0.distance);
+
+  if (run0.split !== null) {
+    stats.splitDistance = stats.distance % run0.split;
+    stats.splitTime = time - interpolate(stats.distance-stats.splitDistance, run0.distance, run0.time);
+  }
+  else {
+    stats.splitDistance = null;
+    stats.splitTime = null;
+  }
+
+  if (run0.pacing.length !== 0) {
+    stats.pacingDiff = time - interpolate(stats.distance, run0.distance, run0.pacing);
+  }
+  else {
+    stats.pacingDiff = null;
+  }
+
+  return stats;
+}
+
+//given value in array1, interpolate into array2
+function interpolate(value, array1, array2) {
+  var index = 0;
+  var numComplete = 0;
+  var complete = array1[array1.length-2];
+  while (array1[index+1] + numComplete*complete < value) {
+    index++;
+    if (index >= array1.length-1) {
+      index = 0;
+      numComplete++;
+    }
+  }
+
+  var frac = (value-numComplete*complete-array1[index])/(array1[index+1]-array1[index]);
+  var fracElapsed = frac*(array2[index+1]-array2[index]);
+  return fracElapsed + array2[index] + numComplete*array2[array2.length-2];
+}
 
 var run1 = {
   date: "4/2/15",
