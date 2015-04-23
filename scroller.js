@@ -499,15 +499,15 @@ var Stopwatch  = function(){
 	}
 
 	this.update = function(){
-		var hs = Math.floor(this.elapsedTime()/10);
-		var s = Math.floor(hs/100);
-		var min = Math.floor(s/60);
+		var hsec = Math.floor(this.elapsedTime()/10);
+		var sec  = Math.floor(hsec/100);
+		var min = Math.floor(sec/60);
 		var time = "";
-		time += zeroPad(min, 2) +":" + zeroPad(s%60, 2) + "." + zeroPad(hs%100, 2);
+		time += zeroPad(min, 2) +":" + zeroPad(sec%60, 2) + "." + zeroPad(hsec%100, 2);
 		$("#fullTime").text(time);
 		$("#pauseLabel1").text(time);
 
-		var stats = getCurrentStats(this.elapsedTime()/1000);
+		var stats = getCurrentStats(sec);
 		var distanceStr = (stats.distance).toFixed(2) + " mi";
 		var splitDistStr;
 		if (!stats.splitDistance) {
