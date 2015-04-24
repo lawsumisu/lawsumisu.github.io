@@ -9,7 +9,7 @@
 
 #sw-header {
 	position:relative;
-	width:100%; height:43px;
+	width:100%; height:45px;
 	border-top:1px solid #000; border-bottom:1px solid #000;
 	opacity: 0.9;
 }
@@ -27,13 +27,11 @@
 #sw-cancel {
 	left:10px;
 	float:left;
-	-webkit-border-image:url(sw-button-cancel.png) 10;
 }
 
 #sw-done {
 	right:10px;
 	float:right;
-	-webkit-border-image:url(sw-button-done.png) 10;
 }
 
 .sw-pressed { opacity:0.4; }

@@ -26,8 +26,8 @@ $(window).on('hashchange', function() {
 		$("#nopaceinput").show();
 		$("#nexttext").hide();
 		$("#ghotext").show();
-		//$("#nopacebtn").addClass("buttonselect");
-		//$("#pacebtn").removeClass("buttonselect");
+		$("#nopacebtn").addClass("buttonselect");
+		$("#pacebtn").removeClass("buttonselect");
 		$("#pace")[0].value="";
 	} else {
 		$("#splitinput").show();
@@ -36,8 +36,8 @@ $(window).on('hashchange', function() {
 		$("#nopaceinput").hide();
 		$("#nexttext").hide();
 		$("#ghotext").show();
-		//$("#nosplitbtn").addClass("buttonselect");
-		//$("#splitbtn").removeClass("buttonselect");
+		$("#nosplitbtn").addClass("buttonselect");
+		$("#splitbtn").removeClass("buttonselect");
 		$("#split")[0].value="";
 	}
 	return false;
@@ -59,7 +59,7 @@ var stopPageInfo = "&type=save&run=0";
 $("#forwardbtn").on('click', function(){
 	if ($.getHashVar('split') != null) {
 		if ($('#pacebtn').hasClass('buttonselect')){
-			location.href="../running.html"+location.hash+"&pace="+$("#pace")[0].value+stopPageInfo;
+			location.href="../running.html"+location.hash+"&pace="+$("#pace")[0].secondvalue+stopPageInfo;
 		} 
 		else {
 			location.href="../running.html"+location.hash+"&pace="+stopPageInfo;
@@ -77,7 +77,7 @@ $("#forwardbtn").on('click', function(){
 /*
 	if($.getHashVar('split') != null){
 		if($("#pacebtn").hasClass("buttonselect")){
-			location.href="../running.html"+location.hash+"&pace="+$("#pace")[0].value+stopPageInfo;
+			location.href="../running.html"+location.hash+"&pace="+$("#pace")[0].secondvalue+stopPageInfo;
 		} else {
 			location.href="../running.html"+location.hash+"&pace="+stopPageInfo;
 		}
@@ -108,6 +108,11 @@ $("#nopacebtn").on('click', function(){
 	$("#nopacebtn").addClass("buttonselect");
 	$("#pacebtn").removeClass("buttonselect");
 });
+
+
+/**
+* Spinning Wheel Widget from: Copyright (c) 2009 Matteo Spinelli, http://cubiq.org/
+**/
 
 $("#splitbtn").on('click',function(){
 	$("#nosplitbtn").removeClass("buttonselect");
@@ -170,7 +175,8 @@ $("#pacebtn").on('click',function(){
 });
 
 function paceDone(){
-	$("#pace")[0].value = SpinningWheel.getSelectedValues().values[0]*60 + Number(SpinningWheel.getSelectedValues().values[2]);
+	$("#pace")[0].value = SpinningWheel.getSelectedValues().values.join().replace(/,/g, '');
+	$("#pace")[0].secondvalue = SpinningWheel.getSelectedValues().values[0]*60 + Number(SpinningWheel.getSelectedValues().values[2]);
 	//$("#forwardbtn").focus();
 }
 
