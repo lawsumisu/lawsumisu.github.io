@@ -29,6 +29,7 @@ $(window).on('hashchange', function() {
 		$("#nopacebtn").addClass("buttonselect");
 		$("#pacebtn").removeClass("buttonselect");
 		$("#pace")[0].value="";
+		$("#splithelptext").hide();
 	} else {
 		$("#splitinput").show();
 		$("#nosplitinput").show();
@@ -39,6 +40,7 @@ $(window).on('hashchange', function() {
 		$("#nosplitbtn").addClass("buttonselect");
 		$("#splitbtn").removeClass("buttonselect");
 		$("#split")[0].value="";
+		$("#splithelptext").show();
 	}
 	return false;
 });

@@ -55,11 +55,15 @@ button {
   text-align: center;
 }     
 
-input {
+input[type="text"] {
   width: 30%;
   text-align:right;
   margin-right:3px;
   margin-left:6px;
+}
+
+input[type="radio"]{
+  margin-right:6px;
 }
 
 #forwardbtn, #backbtn {
@@ -81,4 +85,9 @@ input {
 
 #sw-done-btn {
 	//if need be
+}
+
+#splithelptext {
+	color: grey;
+	margin: 30px;
 }
