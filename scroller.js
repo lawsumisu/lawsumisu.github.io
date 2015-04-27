@@ -49,6 +49,9 @@ var setup = function(state){
 	stopwatch = new Stopwatch();
 	setInterval(function(){stopwatch.update();}, 10);
 	stopwatch.update();
+
+	//Setup carousels
+	setupCarousel(getCurrentStats(0));
 }
 
 /**
@@ -378,6 +381,58 @@ var clamp = function(value, min, max){
 	return Math.min(Math.max(min, value), max);
 }
 
+var setupCarousel = function(stats){
+	var carousel = $("#carousel");
+	var innerCarousel = $("<div>").addClass("carousel-inner");
+	//Set up full time div.
+	var fullTime = $("<div><h1 id = fullTime></h1></div>");
+	fullTime.addClass("item active");
+	//Set up split time div and inner header
+	
+	innerCarousel.append(fullTime)
+	carousel.append(innerCarousel);
+
+	//Add split time and pacing diff info, but only if they are existent stats.
+	if (stats.splitTime != null){
+		var splitTime = $("<div class = item><h1 id = splitTime></h1></div>");
+		innerCarousel.append(splitTime);
+	
+	}
+	if (stats.pacingDiff != null){
+		var timeDiff = $("<div class = item><h1 id = timeDiff></h1></div>");
+		innerCarousel.append(timeDiff);
+	}
+
+	if (innerCarousel.find("div").length > 1){
+		//Setup arrows, but only if there is more than one element in the carousel.
+		var leftArrow = $("<a href='#carousel' id = 'leftControl' class='left carousel-control' data-slide='prev'>"+
+            				"<span class='glyphicon glyphicon-chevron-left'></span></a>");
+		var rightArrow = $("<a href='#carousel' id = 'rightControl' class='right carousel-control' data-slide='next'>"+
+            				"<span class='glyphicon glyphicon-chevron-right'></span></a>");
+
+		innerCarousel.append(leftArrow).append(rightArrow);
+	}
+
+	//Now, set up the distance carousel.
+	var distanceCarousel = $("#carousel2");
+	var innerCarousel2 = $("<div>").addClass("carousel-inner");
+	var fullDistance = $("<div class = 'item active'><h1 id = fullDist></h1></div>");
+	innerCarousel2.append(fullDistance);
+	distanceCarousel.append(innerCarousel2);
+
+	if (stats.pacingDiff != null){
+		var splitDistance = $("<div class = item><h1 id = splitDist></h1></div>");
+		innerCarousel2.append(splitDistance);
+		var leftArrow = $("<a href='#carousel2' id = 'leftControl2' class='left carousel-control' data-slide='prev'>"+
+            				"<span class='glyphicon glyphicon-chevron-left'></span></a>");
+		var rightArrow = $("<a href='#carousel2' id = 'rightControl2' class='right carousel-control' data-slide='next'>"+
+            				"<span class='glyphicon glyphicon-chevron-right'></span></a>");
+
+		innerCarousel2.append(leftArrow).append(rightArrow);
+	}
+
+
+}
 //===================================================================
 //							Helper Classes
 //===================================================================
