@@ -68,12 +68,28 @@
       </div>
     </div>
 
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmation" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <p style="font-size: large">Are you sure you want to permanently delete this run from your history?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-lg pull-left" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-lg pull-right" data-dismiss="modal" onclick="deleteRun();">Yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="external_js/jquery-2.1.3.min.js"></script>
     <script src="external_js/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
     <script src="runs.js"></script>
     <script type="text/javascript">
       var runTable = document.getElementById("runTable");
       var currentView = window.name.split("&");
+
+      var runToRemove = false;
 
       drawTable();
 
@@ -124,7 +140,7 @@
 
         $(cell1).append($('<button class="btn btn-color" style="width:100%" onclick="location.href=sendToStop(' + i + ')"></button>').html('<span class="date">' + run.date + '</span><span class="specs">' + (run.distance[run.distance.length-1]).toFixed(2) + " mi / " + timeStr + '</span>'));
 
-        $(cell2).append($('<button class="btn btn-lg" style="float: right" onclick="deleteRun(' + i + ')"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'));
+        $(cell2).append($('<button class="btn btn-lg" style="float: right" onclick="prepareToDeleteRun(' + i + ')" data-toggle="modal" data-target="#deleteModal"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'));
 
         $(":button").css("height", $(window).height()/12);
       }
@@ -133,7 +149,26 @@
         return "running.html?type=back&run=" + index;
       }
 
+      function prepareToDeleteRun(index) {
+        runToRemove = index;
+      }
+
+      function deleteRun() {
+        if (runToRemove >= runs.length) {
+          currentView.splice(runToRemove,3);
+        }
+        else {
+          currentView[runToRemove] = false;
+        }
+        window.name = currentView.join("&");
+        drawTable();
+      }
+
+/*
       function deleteRun(index) {
+        runToRemove = index;
+        console.log("called deleteRun");
+        /*
         if (index >= runs.length) {
           currentView.splice(index,3);
         }
@@ -142,7 +177,7 @@
         }
         window.name = currentView.join("&");
         drawTable();
-      }
+        */
     </script>
   </body>
 </html>

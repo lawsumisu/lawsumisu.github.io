@@ -117,7 +117,7 @@
         <div class="row">
           <div class="col-xs-12">
             <button class="btn btn-lg" id="leftButton"></button>
-            <button class="btn btn-lg" id="exitButton" onclick="location.href='index.html'">Exit</button>
+            <button class="btn btn-lg" id="exitButton">Exit</button>
           </div>
         </div>
 
@@ -160,6 +160,20 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="exitModal" tabindex="-1" role="dialog" aria-labelledby="exitConfirmation" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <p style="font-size: large">Are you sure you want to exit your run without saving?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-lg pull-left" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-lg pull-right" data-dismiss="modal" onclick="location.href='index.html'">Yes</button>
           </div>
         </div>
       </div>
@@ -336,6 +350,8 @@
             location.href = "index.html";
           }
         });
+        $("#exitButton").attr("data-toggle","modal");
+        $("#exitButton").attr("data-target","#exitModal");
 
         console.log("showing stop screen");
         loadPacingData();
@@ -356,6 +372,9 @@
         $("#leftButton").text("Back");
         $("#leftButton").click(function() {
           location.href="review.html";
+        });
+        $("#exitButton").click(function() {
+          location.href="index.html";
         });
 
         console.log("showing review screen");
