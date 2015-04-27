@@ -197,7 +197,7 @@ var setUpThumb = function(B, radius){
   	};
 
   	scroll.off();
-	scroll.mousedown(function(e){
+	/*scroll.mousedown(function(e){
 		var data  = document.getElementById("scrollFG").getContext("2d").getImageData(0,0,$("#scrollBG").width(), $("#scrollBG").height());
 		scroll.css("z-index", 2);
 		var t = e;
@@ -212,7 +212,7 @@ var setUpThumb = function(B, radius){
 		scroll.mousemove(thumbmove);
 		scroll.mouseleave(thumbleave);
 		$(window).mouseup(thumbup);
-	});
+	});*/
 	
 	scroll.on("touchstart", function(e){
 		var data  = document.getElementById("scrollFG").getContext("2d").getImageData(0,0,$("#scrollFG").width(), $("#scrollFG").height());
@@ -292,6 +292,20 @@ var drawThumbAtT = function(B, t, radius, isHighlighted){
 	scrollT = t;
 	drawSymbol(B, t, radius);
 	createEvent(t);
+}
+
+var setThumbColor = function(ctx, t, isHighlighted){
+	var r = 50 + Math.floor((t)*200);
+	var g = 80 + Math.floor((1-t)*140);
+	var b = 0; 
+	if (isHighlighted){
+		r += 64;
+		g += 64;
+		b += 64;
+	}
+	console.log("rgb(" + r + "," + g + "," + b + ")");
+	ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+
 }
 
 /**
