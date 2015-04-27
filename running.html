@@ -68,7 +68,10 @@
       </div>
 
       <!-- arrow for GR5 --> 
+      <!-- canvas for the full functionality screen --> 
       <canvas id="canvas" width="360" height="200" ></canvas> 
+
+      <!-- <canvas id="canvas" width="360" height="200" ></canvas> -->
 
       <!-- first large arrow for the minimal screen --> 
 
@@ -255,15 +258,16 @@
       }
 
         //init function to draw rectangle
+      //for the full functionality screen 
       function init() {
         var canvas = document.getElementById("canvas");
         var context = canvas.getContext("2d");
         context.fillStyle="#D3D3D3";
         context.beginPath();
-        context.moveTo(60,150);
+        context.moveTo(100,100);
         context.lineTo(190,0);
-        context.lineTo(320,150);
-        context.lineTo(190,300);
+        context.lineTo(280,100);
+        context.lineTo(190,200);
         context.closePath();
         context.fill();
 

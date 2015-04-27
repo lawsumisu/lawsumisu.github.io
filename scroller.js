@@ -78,15 +78,15 @@ var drawActiveTriangle = function(splitTime) {
     if (normalizedSplitTime > 0) {
     	context.fillStyle="red";
     	context.beginPath();
-    	context.moveTo(60,150);
-    	context.lineTo(190,150 + 150*normalizedSplitTime);
-    	context.lineTo(320,150);
+    	context.moveTo(100,100);
+    	context.lineTo(190,100 + 100*normalizedSplitTime);
+    	context.lineTo(280,100);
     } else {
     	context.fillStyle="green";
     	context.beginPath();
-    	context.moveTo(60,150);
-    	context.lineTo(190,150 + 150*normalizedSplitTime);
-    	context.lineTo(320,150);
+    	context.moveTo(100,100);
+    	context.lineTo(190,100 + 100*normalizedSplitTime);
+    	context.lineTo(280,100);
     }
     	
     context.closePath();
