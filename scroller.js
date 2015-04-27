@@ -55,6 +55,45 @@ var setup = function(state){
 }
 
 /**
+ * Draws dynamic triangle
+ */
+var drawActiveTriangle = function(splitTime) {
+	//normalize the split time according to some scale
+	//console.log(splitTime);
+
+	//set an arbitrary upper bound of 5 min - adjust later.
+	normalizedSplitTime = 0;
+
+	if (splitTime > 0) {
+		normalizedSplitTime = Math.min(1, splitTime/60.0);  
+	} else {
+		normalizedSplitTime = Math.max(-1, splitTime/60.0);  
+	}
+
+	//console.log(normalizedSplitTime); 
+
+	var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+
+    if (normalizedSplitTime > 0) {
+    	context.fillStyle="red";
+    	context.beginPath();
+    	context.moveTo(60,150);
+    	context.lineTo(190,150 + 150*normalizedSplitTime);
+    	context.lineTo(320,150);
+    } else {
+    	context.fillStyle="green";
+    	context.beginPath();
+    	context.moveTo(60,150);
+    	context.lineTo(190,150 + 150*normalizedSplitTime);
+    	context.lineTo(320,150);
+    }
+    	
+    context.closePath();
+    context.fill();
+}
+
+/**
  * Draws the curved track for the scroll bar.
  * This scroll bar extends across the width of the containing canvas +/- some horizontal padding.
  * @param  {[int]} width  [width of the canvases that contain the scroll bar.]
@@ -594,5 +633,10 @@ var Stopwatch  = function(){
 		$("#pauseLabel4").text(distanceStr);
 		$("#splitDist").text(splitDistStr);
 		$("#pauseLabel5").text(splitDistStr);
+
+
+		//redraw the dynamic triangle based on the times.
+		drawActiveTriangle(stats.pacingDiff); 
+
 	}
 }
