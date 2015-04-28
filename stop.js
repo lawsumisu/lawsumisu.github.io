@@ -150,7 +150,11 @@ function loadGraph() {
   $('#graphDisplay').highcharts({
       chart: {
           type: 'area',
-          marginBottom: 20
+          marginTop: 30,
+          marginBottom: 30,
+          style: {
+            fontFamily: "'Helvetica Neue',Helvetica,Arial,'sans-serif'"
+          }
       },
       credits: {
         enabled: false
@@ -183,6 +187,9 @@ function loadGraph() {
           labels: {
               formatter: function () {
                   return Math.round(this.value*100)/100;
+              },
+              style: {
+                fontSize: 'medium'
               }
           },
           endOnTick: true
@@ -212,6 +219,9 @@ function loadGraph() {
                   var minutes = Math.floor(this.value/60);
                   var seconds = Math.round(this.value % 60);
                   return minutes + ":" + ('0' + seconds).slice(-2);
+              },
+              style: {
+                fontSize: 'medium'
               }
           },
           endOnTick: true
