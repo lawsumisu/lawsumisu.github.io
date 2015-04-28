@@ -30,6 +30,8 @@ $(window).on('hashchange', function() {
 		$("#pacebtn").removeClass("buttonselect");
 		$("#pace")[0].value="";
 		$("#splithelptext").hide();
+		$("input[name='paceradio'][value='nopace']").prop('checked',true);
+		$("#pacehelptext").show();
 	} else {
 		$("#splitinput").show();
 		$("#nosplitinput").show();
@@ -41,6 +43,8 @@ $(window).on('hashchange', function() {
 		$("#splitbtn").removeClass("buttonselect");
 		$("#split")[0].value="";
 		$("#splithelptext").show();
+		$("input[name='splitradio'][value='nosplit']").prop('checked',true);
+		$("#pacehelptext").hide();
 	}
 	return false;
 });
@@ -104,11 +108,13 @@ $("#nosplitbtn").on('click', function(){
 	$("#splitbtn").removeClass("buttonselect");
 	$("#nexttext").hide();
 	$("#ghotext").show();
+	$("input[name='splitradio'][value='nosplit']").prop('checked',true);
 });
 
 $("#nopacebtn").on('click', function(){
 	$("#nopacebtn").addClass("buttonselect");
 	$("#pacebtn").removeClass("buttonselect");
+	$("input[name='paceradio'][value='nopace']").prop('checked',true);
 });
 
 
@@ -121,6 +127,7 @@ $("#splitbtn").on('click',function(){
 	$("#splitbtn").addClass("buttonselect");
 	$("#nexttext").show();
 	$("#ghotext").hide();
+	$("input[name='splitradio'][value='split']").prop('checked',true);
 
 	var splitmiles = {};
 	var splitdivisions = {};
@@ -140,18 +147,28 @@ $("#splitbtn").on('click',function(){
 	SpinningWheel.addSlot(splitdivisions, 'left');
 
 	SpinningWheel.setDoneAction(splitDone);
+	SpinningWheel.setCancelAction(splitCancel);
 
 	SpinningWheel.open();
 });
 
 function splitDone() {
 	$("#split")[0].value = SpinningWheel.getSelectedValues().values.join().replace(/,/g, '');
+	if ($("#split")[0].value == 0){
+		$("#nosplitbtn").trigger('click');
+		$("#split")[0].value = "";
+	}
 	//$("#forwardbtn").focus();
+}
+
+function splitCancel() {
+	$("#nosplitbtn").trigger('click');
 }
 
 $("#pacebtn").on('click',function(){
 	$("#nopacebtn").removeClass("buttonselect");
 	$("#pacebtn").addClass("buttonselect");
+	$("input[name='paceradio'][value='pace']").prop('checked',true);
 
 	var paceminutes = {};
 	var paceseconds = {};
@@ -171,6 +188,7 @@ $("#pacebtn").on('click',function(){
 	SpinningWheel.addSlot(paceseconds, 'left');
 
 	SpinningWheel.setDoneAction(paceDone);
+	SpinningWheel.setCancelAction(paceCancel);
 	
 	SpinningWheel.open();
 	
@@ -179,7 +197,15 @@ $("#pacebtn").on('click',function(){
 function paceDone(){
 	$("#pace")[0].value = SpinningWheel.getSelectedValues().values.join().replace(/,/g, '');
 	$("#pace")[0].secondvalue = SpinningWheel.getSelectedValues().values[0]*60 + Number(SpinningWheel.getSelectedValues().values[2]);
+	if($("#pace")[0].secondvalue == 0){
+		$("#nopacebtn").trigger('click');
+		$("#pace")[0].value = "";
+	}
 	//$("#forwardbtn").focus();
+}
+
+function paceCancel(){
+	$("#nopacebtn").trigger('click');
 }
 
 $("#backbtn").css("height", $(window).height()/12);

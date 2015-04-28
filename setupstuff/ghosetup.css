@@ -23,6 +23,7 @@ h2 {
 button {
   background-color: #D3D3D3;
   outline: 2px solid gray;
+  text-align:left;
 }
 
 .tophalf {
@@ -63,7 +64,11 @@ input[type="text"] {
 }
 
 input[type="radio"]{
-  margin-right:6px;
+  margin-right:10px;
+}
+
+input[name="paceradio']{
+  margin-right:20px;
 }
 
 #forwardbtn, #backbtn {
@@ -87,7 +92,7 @@ input[type="radio"]{
 	//if need be
 }
 
-#splithelptext {
+.helptext {
 	color: grey;
 	margin: 30px;
 }
