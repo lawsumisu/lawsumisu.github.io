@@ -51,7 +51,9 @@ var setup = function(state){
 	stopwatch.update();
 
 	//Setup carousels
-	setupCarousel(getCurrentStats(0));
+	var stats = getCurrentStats(0);
+	setupCarousel(stats);
+	setupPauseScreen(stats);
 }
 
 /**
@@ -280,13 +282,14 @@ var drawThumbAtT = function(B, t, radius, isHighlighted){
 	ctx.clearRect(0,0, scroll.width(), scroll.height());
 	ctx.beginPath();
 	ctx.arc(L.x, L.y, radius, 0, 2 * Math.PI, false);
-	ctx.fillStyle = '#6EBF4E';
+	/*ctx.fillStyle = '#6EBF4E';
 	if (isHighlighted){
 		ctx.fillStyle = '#AEFF8E';
-	}
+	}*/
+	setThumbColor(ctx, isHighlighted);
 	ctx.fill();
 	ctx.lineWidth = radius*.2;
-	ctx.strokeStyle = '#003300';
+	ctx.strokeStyle = '#001100';
 	ctx.stroke(); 
 
 	scrollT = t;
@@ -294,15 +297,35 @@ var drawThumbAtT = function(B, t, radius, isHighlighted){
 	createEvent(t);
 }
 
-var setThumbColor = function(ctx, t, isHighlighted){
-	var r = 50 + Math.floor((t)*200);
+/**
+ * Sets the fill style of a canvas context based on thumb state.
+ * @param {[2DContext]}  ctx           [context of a canvas]
+ * @param {Boolean} isHighlighted [whether or not the thumb should be highlighted]
+ */
+var setThumbColor = function(ctx, isHighlighted){
+	/*var r = 50 + Math.floor((t)*200);
 	var g = 80 + Math.floor((1-t)*140);
-	var b = 0; 
+	var b = 0; */
+
+	var r = 110;
+	var g = 191;
+	var b = 143;
+	if (currentState == "pause"){
+		r = 211;
+		g = 211;
+		b = 20;
+	}
+	else if (currentState == "stop"){
+		r = 230;
+		g = 30;
+		b = 30;
+	}
 	if (isHighlighted){
 		r += 64;
 		g += 64;
 		b += 64;
 	}
+
 	console.log("rgb(" + r + "," + g + "," + b + ")");
 	ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
 
@@ -349,18 +372,18 @@ var drawSymbol = function(B, t, radius){
 	var textSize = radius/1.5;
 	ctx.font= textSize+"px Verdana";
 	var start = B.locationAt(0).add(new Point(0, radius*1.8));
-	displayText("go", ctx, "Gho", start, textSize);
+	displayText("go", ctx, "Gho", start, textSize, "#6EBF4E");
 	
 	var middle = B.locationAt(.5);
 	middle.y = start.y;
-	displayText("pause", ctx, "Pause", middle, textSize);
+	displayText("pause", ctx, "Pause", middle, textSize, "#C3C314");
 	var end = B.locationAt(1);
 	end.y = start.y;
-	displayText("stop", ctx, "Stop", end, textSize);
+	displayText("stop", ctx, "Stop", end, textSize, "#D61D1D");
 }
 
-var displayText = function(state, ctx, title, position, textSize){
-	if (currentState == state) ctx.fillStyle = "#6EBF4E";
+var displayText = function(state, ctx, title, position, textSize, color){
+	if (currentState == state) ctx.fillStyle = color;
 	else ctx.fillStyle = "#DDDDDD";
 	var length = textSize*.5*title.length;
 	ctx.fillText(title, position.x - length/2, position.y);
@@ -485,6 +508,25 @@ var setupCarousel = function(stats){
 	}
 
 
+}
+
+var setupPauseScreen = function(stats){
+	var data = [true, false, false, true, false];
+	if (stats.splitTime != null){
+		data[1] = true;
+	}
+	if (stats.pacingDiff != null){
+		data[2] = true;
+		data[4] = true;
+	}
+
+	var pauseData = $("#pauseScreen");
+	for (var i = 0; i < data.length; i++){
+		if (data[i]){
+			var header = $("<h3>").attr("id", "pauseLabel" + (i+1)).addClass("pauseLabel");
+			pauseData.append(header);
+		}
+	}
 }
 //===================================================================
 //							Helper Classes
