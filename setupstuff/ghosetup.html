@@ -27,19 +27,19 @@
 		<div id='nav' class="row">
 			<div class="col-xs-12">
 				<button id="backbtn" type="button" class="btn btn-lg">
-					Back
+					<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
 				</button>
 
 				<button id="forwardbtn" type="button" class="btn btn-lg">
-					<span id='nexttext'>Next</span>
-					<span id='ghotext'>Gho</span>
+					<span id='nexttext'><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></span>
+					<span id='ghotext'>G<span class="white">h</span>o</span>
 				</button>
 			</div>
 		</div>
 
 		<div id='splitinput' class="row buttontop">
 			<div class="col-xs-10 col-xs-offset-1">
-				<button id="splitbtn" type="button" class="btn btn-lg btn-block">
+				<button id="splitbtn" type="button" class="radiobtn btn btn-lg btn-block">
 					<input type="radio" name="splitradio" value="split"/>Split Distance: </span><input type='text' id='split' readonly="true" name='split distance'/> mi</span>
 				</button>
 			</div>
@@ -47,7 +47,7 @@
 
 		<div id='nosplitinput' class="row buttonspacer">
 			<div class="col-xs-10 col-xs-offset-1">
-				<button id="nosplitbtn" type="button" class="btn btn-lg btn-block buttonselect">
+				<button id="nosplitbtn" type="button" class="radiobtn btn btn-lg btn-block buttonselect">
 					<input type="radio" name="splitradio" value="nosplit"/>No Split Distance
 				</button>
 			</div>
@@ -55,7 +55,7 @@
 
 		<div id='paceinput' class="row buttontop">
 			<div class="col-xs-10 col-xs-offset-1">
-				<button id="pacebtn" type="button" class="btn btn-lg btn-block">
+				<button id="pacebtn" type="button" class="radiobtn btn btn-lg btn-block">
 					<input type="radio" name="paceradio" value="pace"/>Pacing: <input type='text' readonly="true" id='pace' name='pace'/>min
 				</button>
 			</div>
@@ -63,7 +63,7 @@
 
 		<div id='nopaceinput' class="row buttonspacer">
 			<div class="col-xs-10 col-xs-offset-1">
-				<button id="nopacebtn" type="button" class="btn btn-lg btn-block buttonselect">
+				<button id="nopacebtn" type="button" class="radiobtn btn btn-lg btn-block buttonselect">
 					<input type="radio" name="paceradio" value="nopace"/>No Pacing
 				</button>
 			</div>

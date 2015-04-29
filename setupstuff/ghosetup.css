@@ -8,6 +8,10 @@ h1 {
   color: #99DE7E;
 }
 
+.white {
+  color: white;
+}
+
 /*
 .gray {
   color: #DDDDDD;
@@ -22,7 +26,7 @@ h2 {
 
 button {
   background-color: #D3D3D3;
-  outline: 2px solid gray;
+  //outline: 2px solid gray;
   text-align:left;
 }
 
@@ -73,6 +77,7 @@ input[name="paceradio']{
 
 #forwardbtn, #backbtn {
   width: 30%;
+  outline: 2px solid gray;
   /*position: fixed;*/
 }
 
@@ -85,14 +90,26 @@ input[name="paceradio']{
 }
 
 #sw-cancel-btn {
-	//if need be
+	outline: 2px solid gray;
 }
 
 #sw-done-btn {
-	//if need be
+	outline: 2px solid gray;
 }
 
 .helptext {
 	color: grey;
 	margin: 30px;
+}
+
+#swbackmodalsplit{
+	z-index: 1000;
+}
+
+#swbackmodalpace{
+	z-index:1000;
+}
+
+.radiobtn {
+	text-align:left;
 }

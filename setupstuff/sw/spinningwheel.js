@@ -30,6 +30,9 @@ var SpinningWheel = {
 				this.tapDown(e);
 			} else if (e.currentTarget.id == 'sw-frame') {
 				this.scrollStart(e);
+			} else {
+				e.currentTarget.id='sw-cancel';
+				this.tapDown(e);
 			}
 		} else if (e.type == 'touchmove') {
 			this.lockScreen(e);
