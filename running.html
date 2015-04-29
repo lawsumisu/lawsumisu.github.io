@@ -75,7 +75,9 @@
       <!-- canvas for the full functionality screen --> 
       <canvas id="canvas" width="360" height="200" ></canvas> 
 
-      <!-- <canvas id="canvas" width="360" height="200" ></canvas> -->
+      <!-- canvas for the minimum functionality screen --> 
+
+      <canvas id="canvas2" width="360" height="400" ></canvas>
 
       <!-- first large arrow for the minimal screen --> 
 
@@ -111,6 +113,10 @@
     </div>
 
     <div id = "pauseScreen">
+      <!-- <div class="col-xs-6 col-md-4" id = "pauseHelpLabels"></div> --> 
+      <!-- <div class="col-xs-12 col-md-8" id = "pauseLabels"></div> --> 
+      
+      <!-- two column layout --> 
       <!--<h3 id = "pauseLabel1" class = "pauseLabel">27:46:11</h3>
       <h3 id = "pauseLabel2" class = "pauseLabel">01:03:11</h3>
       <h3 id = "pauseLabel3" class = "pauseLabel">+00:48:00</h3>
@@ -239,6 +245,7 @@
         document.getElementById("carousel").style.visibility = "visible"; 
         document.getElementById("carousel2").style.visibility = "visible";
         document.getElementById("content").style.visibility = "visible"; 
+        document.getElementById("canvas2").style.display = "none"; 
         //document.getElementById("arrow2").style.display = "inline";  
         //document.getElementById("arrow").style.display = "none"; 
 
@@ -265,6 +272,7 @@
         //init function to draw rectangle
       //for the full functionality screen 
       function init() {
+        //full functionality canvas
         var canvas = document.getElementById("canvas");
         var context = canvas.getContext("2d");
         context.fillStyle="#D3D3D3";
@@ -273,6 +281,19 @@
         context.lineTo(190,0);
         context.lineTo(280,100);
         context.lineTo(190,200);
+        context.closePath();
+        context.fill();
+
+
+        //for the minimalized running screens 
+        var canvas = document.getElementById("canvas2");
+        var context = canvas.getContext("2d");
+        context.fillStyle="#D3D3D3";
+        context.beginPath();
+        context.moveTo(50,200);
+        context.lineTo(190,0);
+        context.lineTo(330,200);
+        context.lineTo(190,400);
         context.closePath();
         context.fill();
 
@@ -301,6 +322,8 @@
               document.getElementById("content").style.visibility = "hidden"; 
               //document.getElementById("arrow2").style.display = "none"; 
               //document.getElementById("arrow").style.display = "inline"; 
+              document.getElementById("canvas").style.display = "none";  
+              document.getElementById("canvas2").style.display = "inline";  
             } 
             else if ((beta > -60 && beta <= -20)) {
 
@@ -314,14 +337,17 @@
               document.getElementById("carousel2").style.visibility = "visible"; 
               document.getElementById("content").style.visibility = "hidden"; 
               //document.getElementById("arrow2").style.display = "none"; 
-              //document.getElementById("arrow").style.display = "inline";  
+              //document.getElementById("arrow").style.display = "inline";
+              document.getElementById("canvas").style.display = "none";  
+              document.getElementById("canvas2").style.display = "inline";  
             } 
             else if ((beta > -50 && beta <= 0)) {
               document.getElementById("carousel").style.visibility = "visible"; 
               document.getElementById("carousel2").style.visibility = "visible";
               document.getElementById("content").style.visibility = "visible"; 
               //document.getElementById("arrow2").style.display = "inline";  
-              //document.getElementById("arrow").style.display = "none"; 
+              document.getElementById("canvas2").style.display = "none"; 
+              document.getElementById("canvas").style.display = "inline"; 
             } 
             else {
             }

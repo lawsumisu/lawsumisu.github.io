@@ -93,6 +93,28 @@ var drawActiveTriangle = function(splitTime) {
     	
     context.closePath();
     context.fill();
+
+    //repeat for the minimalized canvas
+
+    var canvas = document.getElementById("canvas2");
+    var context = canvas.getContext("2d");
+
+    if (normalizedSplitTime > 0) {
+    	context.fillStyle="red";
+    	context.beginPath();
+    	context.moveTo(50,200);
+    	context.lineTo(190,200 + 200*normalizedSplitTime);
+    	context.lineTo(330,200);
+    } else {
+    	context.fillStyle="green";
+    	context.beginPath();
+    	context.moveTo(50,200);
+    	context.lineTo(190,200 + 200*normalizedSplitTime);
+    	context.lineTo(330,200);
+    }
+    	
+    context.closePath();
+    context.fill();
 }
 
 /**
@@ -461,7 +483,7 @@ var setupCarousel = function(stats){
 	var carousel = $("#carousel");
 	var innerCarousel = $("<div>").addClass("carousel-inner");
 	//Set up full time div.
-	var fullTime = $("<div><h1 id = fullTime></h1></div>");
+	var fullTime = $("<div><h1 id = fullTime style = 'font-size:120%'></h1></div>");
 	fullTime.addClass("item active");
 	//Set up split time div and inner header
 	
@@ -470,12 +492,12 @@ var setupCarousel = function(stats){
 
 	//Add split time and pacing diff info, but only if they are existent stats.
 	if (stats.splitTime != null){
-		var splitTime = $("<div class = item><h1 id = splitTime></h1></div>");
+		var splitTime = $("<div class = item><h1 id = splitTime style = 'font-size:120%'></h1></div>");
 		innerCarousel.append(splitTime);
 	
 	}
 	if (stats.pacingDiff != null){
-		var timeDiff = $("<div class = item><h1 id = timeDiff></h1></div>");
+		var timeDiff = $("<div class = item><h1 id = timeDiff style = 'font-size:120%'></h1></div>");
 		innerCarousel.append(timeDiff);
 	}
 
@@ -492,12 +514,12 @@ var setupCarousel = function(stats){
 	//Now, set up the distance carousel.
 	var distanceCarousel = $("#carousel2");
 	var innerCarousel2 = $("<div>").addClass("carousel-inner");
-	var fullDistance = $("<div class = 'item active'><h1 id = fullDist></h1></div>");
+	var fullDistance = $("<div class = 'item active'><h1 id = fullDist style = 'font-size:120%'></h1></div>");
 	innerCarousel2.append(fullDistance);
 	distanceCarousel.append(innerCarousel2);
 
 	if (stats.pacingDiff != null){
-		var splitDistance = $("<div class = item><h1 id = splitDist></h1></div>");
+		var splitDistance = $("<div class = item><h1 id = splitDist style = 'font-size:120%'></h1></div>");
 		innerCarousel2.append(splitDistance);
 		var leftArrow = $("<a href='#carousel2' id = 'leftControl2' class='left carousel-control' data-slide='prev'>"+
             				"<span class='glyphicon glyphicon-chevron-left'></span></a>");
@@ -524,9 +546,11 @@ var setupPauseScreen = function(stats){
 	for (var i = 0; i < data.length; i++){
 		if (data[i]){
 			var header = $("<h3>").attr("id", "pauseLabel" + (i+1)).addClass("pauseLabel");
+			//console.log(header); 
 			pauseData.append(header);
 		}
 	}
+	//console.log(pauseData); 
 }
 //===================================================================
 //							Helper Classes
