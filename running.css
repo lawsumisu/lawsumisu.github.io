@@ -47,7 +47,8 @@ canvas {
 
 #leftControl, #rightControl, #leftControl2, #rightControl2 {
 	background-image: none; 
-	margin-bottom: 20px;
+	margin-bottom: 50px;
+	font-size: 300%;
 }
 
 .glyphicon-chevron-left, .glyphicon-chevron-right {
