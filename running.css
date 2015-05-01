@@ -124,3 +124,7 @@ canvas {
 .toggled {
 	font-weight: bold; 
 }
+
+.modal .btn {
+	outline: 2px solid gray;
+}
