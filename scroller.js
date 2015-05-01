@@ -706,13 +706,14 @@ var Stopwatch  = function(){
 		}
 
 		$("#splitTime").text(splitTimeStr);
-		$("#pauseLabel2").text(splitTimeStr);
+		//$("#pauseLabel2").text('Split Time: ' + splitTimeStr);
+		$("#pauseLabel2").innerHTML = "<span class = 'pauseHelpLabel'> Split Time: </span>" + splitTimeStr;
 		$("#timeDiff").text(diffStr);
-		$("#pauseLabel3").text(diffStr);
+		$("#pauseLabel3").text('Delta: ' + diffStr);
 		$("#fullDist").text(distanceStr);
-		$("#pauseLabel4").text(distanceStr);
+		$("#pauseLabel4").text('Distance: ' + distanceStr);
 		$("#splitDist").text(splitDistStr);
-		$("#pauseLabel5").text(splitDistStr);
+		$("#pauseLabel5").text('Split Distance: ' + splitDistStr);
 
 
 		//redraw the dynamic triangle based on the times.

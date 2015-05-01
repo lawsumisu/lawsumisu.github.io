@@ -71,7 +71,7 @@ canvas {
 .pauseLabel {
 	font-size: 380%; 
 	text-align: left;
-	margin-left: 30%;
+	/*margin-left: 30%;*/
 	padding-left: 5%;
 	padding-right: 5%;
 }
