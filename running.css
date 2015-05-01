@@ -30,6 +30,7 @@ canvas {
 	text-align: center;
 	position: relative;
 	margin-top: -25px;
+	color: DarkGray;
 }
 
 .carousel {
@@ -123,8 +124,12 @@ canvas {
 
 .toggled {
 	font-weight: bold; 
+<<<<<<< HEAD
 }
 
 .modal .btn {
 	outline: 2px solid gray;
+=======
+	color: black;
+>>>>>>> 87bd2f56f70a7c5bd7c15ed6b19e0b1e5a0902a2
 }
