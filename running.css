@@ -27,8 +27,10 @@ canvas {
 }*/
 
 .carousel {
+	margin-top: 0px;
     height: 100px;
     margin-bottom: 20px;
+    padding-top: 0px;
     /*display: none;*/
     visibility: hidden;
 }
