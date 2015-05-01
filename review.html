@@ -32,10 +32,6 @@
         vertical-align: center;
       }
 
-      .btn-color {
-        background-color: #99DE7E;
-      }
-
       #backButton {
         outline: 2px solid gray;
         margin-bottom: 10px;
@@ -48,6 +44,10 @@
 
       .btn {
         background-color: #DCDCDC;
+      }
+
+      .btn-color {
+        background-color: #99DE7E;
       }
     </style>
   </head>
@@ -138,7 +138,7 @@
         var sec = Math.round(val % 60);
         var timeStr = min + ":" + ('0' + sec).slice(-2);
 
-        $(cell1).append($('<button class="btn btn-color" style="width:100%" onclick="location.href=sendToStop(' + i + ')"></button>').html('<span class="date">' + run.date + '</span><span class="specs">' + (run.distance[run.distance.length-1]).toFixed(2) + " mi / " + timeStr + '</span>'));
+        $(cell1).append($('<button class="btn-color btn" style="width:100%" onclick="location.href=sendToStop(' + i + ')"></button>').html('<span class="date">' + run.date + '</span><span class="specs">' + (run.distance[run.distance.length-1]).toFixed(2) + " mi / " + timeStr + '</span>'));
 
         $(cell2).append($('<button class="btn btn-lg" style="float: right" onclick="prepareToDeleteRun(' + i + ')" data-toggle="modal" data-target="#deleteModal"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>'));
 
