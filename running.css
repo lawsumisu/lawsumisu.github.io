@@ -30,6 +30,7 @@ canvas {
 	text-align: center;
 	position: relative;
 	margin-top: -25px;
+	color: DarkGray;
 }
 
 .carousel {
@@ -123,4 +124,5 @@ canvas {
 
 .toggled {
 	font-weight: bold; 
+	color: black;
 }
