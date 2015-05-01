@@ -26,8 +26,14 @@ canvas {
 	
 }*/
 
+.carouselBread2 {
+	text-align: center;
+	position: relative;
+	margin-top: -25px;
+}
+
 .carousel {
-	margin-top: 0px;
+	margin-top: -20px;
     height: 90px;
     margin-bottom: 20px;
     padding-top: 0px;
@@ -44,7 +50,8 @@ canvas {
 
 .carousel .item {
     width: 100%;
-    height: 70px;
+    height: 55px;
+    padding-top: 0px;
     background-color: white;
 };
 
@@ -106,4 +113,10 @@ canvas {
 .btn {
 	outline: 2px solid gray;
 	background-color: #DCDCDC;
+}
+
+.carousel-inner {
+	margin-top: 10px;
+	padding-top: -50px;
+	height: 75px;
 }
