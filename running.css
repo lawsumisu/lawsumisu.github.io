@@ -35,6 +35,10 @@ canvas {
     visibility: hidden;
 }
 
+.carouselBread {
+	text-align: center; 
+}
+
 .carousel .item {
     width: 100%;
     height: 90px;
