@@ -76,6 +76,17 @@ canvas {
 	padding-right: 5%;
 }
 
+.pauseHelpLabel {
+	font-size: 150%; 
+	text-align: left;
+	/*margin-left: 30%;*/
+	padding-left: 5%;
+	padding-right: 5%;
+	padding-top:25%;
+	padding-bottom: 15%;
+}
+
+
 .deficit {
 	color: red;
 }
