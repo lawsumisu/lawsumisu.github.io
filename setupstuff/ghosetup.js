@@ -128,6 +128,7 @@ $("#splitbtn").on('click',function(){
 	$("#nexttext").show();
 	$("#ghotext").hide();
 	$("input[name='splitradio'][value='split']").prop('checked',true);
+	$(".container").append($("<div id='swbackmodalsplit' class='modal-backdrop fade in'></div>"));
 
 	var splitmiles = {};
 	var splitdivisions = {};
@@ -145,6 +146,7 @@ $("#splitbtn").on('click',function(){
 	SpinningWheel.addSlot(splitmiles, 'right');
 	SpinningWheel.addSlot({separator: '.'}, 'readonly shrink');
 	SpinningWheel.addSlot(splitdivisions, 'left');
+	SpinningWheel.addSlot({separator: 'mi'}, 'readonly shrink');
 
 	SpinningWheel.setDoneAction(splitDone);
 	SpinningWheel.setCancelAction(splitCancel);
@@ -152,8 +154,13 @@ $("#splitbtn").on('click',function(){
 	SpinningWheel.open();
 });
 
+$("#swbackmodalsplit").on('click',function(){
+	alert('hi');
+});
+
 function splitDone() {
-	$("#split")[0].value = SpinningWheel.getSelectedValues().values.join().replace(/,/g, '');
+	$("#swbackmodalsplit").remove();
+	$("#split")[0].value = SpinningWheel.getSelectedValues().values.join().replace(/,/g, '').slice(0,-2);
 	if ($("#split")[0].value == 0){
 		$("#nosplitbtn").trigger('click');
 		$("#split")[0].value = "";
@@ -162,6 +169,7 @@ function splitDone() {
 }
 
 function splitCancel() {
+	$("#swbackmodalsplit").remove();
 	$("#nosplitbtn").trigger('click');
 }
 
@@ -169,6 +177,7 @@ $("#pacebtn").on('click',function(){
 	$("#nopacebtn").removeClass("buttonselect");
 	$("#pacebtn").addClass("buttonselect");
 	$("input[name='paceradio'][value='pace']").prop('checked',true);
+	$(".container").append($("<div id='swbackmodalpace' class='modal-backdrop fade in'></div>"));
 
 	var paceminutes = {};
 	var paceseconds = {};
@@ -186,6 +195,7 @@ $("#pacebtn").on('click',function(){
 	SpinningWheel.addSlot(paceminutes, 'right');
 	SpinningWheel.addSlot({separator: ':'}, 'readonly shrink');
 	SpinningWheel.addSlot(paceseconds, 'left');
+	SpinningWheel.addSlot({separator: 'min'}, 'readonly shrink');
 
 	SpinningWheel.setDoneAction(paceDone);
 	SpinningWheel.setCancelAction(paceCancel);
@@ -195,7 +205,8 @@ $("#pacebtn").on('click',function(){
 });
 
 function paceDone(){
-	$("#pace")[0].value = SpinningWheel.getSelectedValues().values.join().replace(/,/g, '');
+	$("#swbackmodalpace").remove();
+	$("#pace")[0].value = SpinningWheel.getSelectedValues().values.join().replace(/,/g, '').slice(0,-3);
 	$("#pace")[0].secondvalue = SpinningWheel.getSelectedValues().values[0]*60 + Number(SpinningWheel.getSelectedValues().values[2]);
 	if($("#pace")[0].secondvalue == 0){
 		$("#nopacebtn").trigger('click');
@@ -205,6 +216,7 @@ function paceDone(){
 }
 
 function paceCancel(){
+	$("#swbackmodalpace").remove();
 	$("#nopacebtn").trigger('click');
 }
 
