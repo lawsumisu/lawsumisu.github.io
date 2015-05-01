@@ -32,6 +32,7 @@ $(window).on('hashchange', function() {
 		$("#splithelptext").hide();
 		$("input[name='paceradio'][value='nopace']").prop('checked',true);
 		$("#pacehelptext").show();
+		$("#forwardbtn").addClass("buttonselect");
 	} else {
 		$("#splitinput").show();
 		$("#nosplitinput").show();
@@ -45,6 +46,7 @@ $(window).on('hashchange', function() {
 		$("#splithelptext").show();
 		$("input[name='splitradio'][value='nosplit']").prop('checked',true);
 		$("#pacehelptext").hide();
+		$("#forwardbtn").addClass("buttonselect");
 	}
 	return false;
 });
@@ -109,12 +111,14 @@ $("#nosplitbtn").on('click', function(){
 	$("#nexttext").hide();
 	$("#ghotext").show();
 	$("input[name='splitradio'][value='nosplit']").prop('checked',true);
+	$("#forwardbtn").addClass("buttonselect");
 });
 
 $("#nopacebtn").on('click', function(){
 	$("#nopacebtn").addClass("buttonselect");
 	$("#pacebtn").removeClass("buttonselect");
 	$("input[name='paceradio'][value='nopace']").prop('checked',true);
+	
 });
 
 
@@ -127,6 +131,7 @@ $("#splitbtn").on('click',function(){
 	$("#splitbtn").addClass("buttonselect");
 	$("#nexttext").show();
 	$("#ghotext").hide();
+	$("#forwardbtn").removeClass("buttonselect");
 	$("input[name='splitradio'][value='split']").prop('checked',true);
 	$(".container").append($("<div id='swbackmodalsplit' class='modal-backdrop fade in'></div>"));
 
