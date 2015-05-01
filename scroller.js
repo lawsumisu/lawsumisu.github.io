@@ -483,7 +483,7 @@ var setupCarousel = function(stats){
 	var carousel = $("#carousel");
 	var innerCarousel = $("<div>").addClass("carousel-inner");
 	//Set up full time div.
-	var fullTime = $("<div><h1 id = fullTime style = 'font-size:110%'></h1></div>");
+	var fullTime = $("<div><h1 id = fullTime style = 'font-size:105%'></h1></div>");
 	fullTime.addClass("item active");
 	//Set up split time div and inner header
 	
@@ -492,12 +492,12 @@ var setupCarousel = function(stats){
 
 	//Add split time and pacing diff info, but only if they are existent stats.
 	if (stats.splitTime != null){
-		var splitTime = $("<div class = item><h1 id = splitTime style = 'font-size:110%'></h1></div>");
+		var splitTime = $("<div class = item><h1 id = splitTime style = 'font-size:105%'></h1></div>");
 		innerCarousel.append(splitTime);
 	
 	}
 	if (stats.pacingDiff != null){
-		var timeDiff = $("<div class = item><h1 id = timeDiff style = 'font-size:110%'></h1></div>");
+		var timeDiff = $("<div class = item><h1 id = timeDiff style = 'font-size:105%'></h1></div>");
 		innerCarousel.append(timeDiff);
 	}
 
@@ -514,12 +514,12 @@ var setupCarousel = function(stats){
 	//Now, set up the distance carousel.
 	var distanceCarousel = $("#carousel2");
 	var innerCarousel2 = $("<div>").addClass("carousel-inner");
-	var fullDistance = $("<div class = 'item active'><h1 id = fullDist style = 'font-size:110%'></h1></div>");
+	var fullDistance = $("<div class = 'item active'><h1 id = fullDist style = 'font-size:105%'></h1></div>");
 	innerCarousel2.append(fullDistance);
 	distanceCarousel.append(innerCarousel2);
 
 	if (stats.pacingDiff != null){
-		var splitDistance = $("<div class = item><h1 id = splitDist style = 'font-size:110%'></h1></div>");
+		var splitDistance = $("<div class = item><h1 id = splitDist style = 'font-size:105%'></h1></div>");
 		innerCarousel2.append(splitDistance);
 		var leftArrow = $("<a href='#carousel2' id = 'leftControl2' class='left carousel-control' data-slide='prev'>"+
             				"<span class='glyphicon glyphicon-chevron-left'></span></a>");
@@ -542,12 +542,20 @@ var setupPauseScreen = function(stats){
 		data[4] = true;
 	}
 
-	var pauseData = $("#pauseScreen");
+	//var pauseData = $("#pauseScreen");
+	var pauseData = $("#pauseLabels");
+	var pauseHelpData = $("#pauseHelpLabels");
 	for (var i = 0; i < data.length; i++){
 		if (data[i]){
 			var header = $("<h3>").attr("id", "pauseLabel" + (i+1)).addClass("pauseLabel");
+
+			//add another label within the left column 
+			var helpLabel = $("<h4>").attr("id", "pauseHelpLabel" + (i+1)).addClass("pauseHelpLabel");
+
+
 			//console.log(header); 
 			pauseData.append(header);
+			pauseHelpData.append(helpLabel);
 		}
 	}
 	//console.log(pauseData); 
@@ -679,6 +687,7 @@ var Stopwatch  = function(){
 		var time = "";
 		time += zeroPad(min, 2) +":" + zeroPad(sec%60, 2) + "." + zeroPad(hsec%100, 2);
 		$("#fullTime").text(time);
+		$("#pauseHelpLabel1").text("Time: ");
 		$("#pauseLabel1").text(time);
 
 		var stats = getCurrentStats(sec);
@@ -706,12 +715,17 @@ var Stopwatch  = function(){
 		}
 
 		$("#splitTime").text(splitTimeStr);
+		$("#pauseHelpLabel2").text('Split Time:');
 		$("#pauseLabel2").text(splitTimeStr);
+		//$("#pauseLabel2").innerHTML = "<span class = 'pauseHelpLabel'> Split Time: </span>" + splitTimeStr;
 		$("#timeDiff").text(diffStr);
+		$("#pauseHelpLabel3").text('Delta:');
 		$("#pauseLabel3").text(diffStr);
 		$("#fullDist").text(distanceStr);
+		$("#pauseHelpLabel4").text('Distance:');
 		$("#pauseLabel4").text(distanceStr);
 		$("#splitDist").text(splitDistStr);
+		$("#pauseHelpLabel5").text('Split Distance:');
 		$("#pauseLabel5").text(splitDistStr);
 
 
