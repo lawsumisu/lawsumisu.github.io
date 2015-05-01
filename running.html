@@ -333,6 +333,7 @@
               $("#runningScreen").css("display", "block");
               $("#stopScreen").css("display", "none");
               $("#pauseScreen").css("display", "none");
+              $(".carouselBread2").css("visibility", "hidden");
               //setup("go"); 
 
               document.getElementById("carousel").style.visibility = "hidden"; 
@@ -348,6 +349,7 @@
               $("#runningScreen").css("display", "block");
               $("#stopScreen").css("display", "none");
               $("#pauseScreen").css("display", "none");
+              $(".carouselBread2").css("visibility", "visible");
               //setup("go"); 
 
 
@@ -360,6 +362,8 @@
               document.getElementById("canvas2").style.display = "inline";  
             } 
             else if ((beta > -50 && beta <= 0)) {
+              //$(".carouselBread2").css("display", "hidden");
+              $(".carouselBread2").css("visibility", "visible");
               document.getElementById("carousel").style.visibility = "visible"; 
               document.getElementById("carousel2").style.visibility = "visible";
               document.getElementById("content").style.visibility = "visible"; 

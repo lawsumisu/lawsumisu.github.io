@@ -113,3 +113,7 @@ input[name="paceradio']{
 .radiobtn {
 	text-align:left;
 }
+
+#ghotext {
+  color: DarkGreen;
+}

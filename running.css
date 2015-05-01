@@ -123,13 +123,11 @@ canvas {
 }
 
 .toggled {
-	font-weight: bold; 
-<<<<<<< HEAD
+	font-weight: bold;
+	color: black; 
 }
 
 .modal .btn {
 	outline: 2px solid gray;
-=======
 	color: black;
->>>>>>> 87bd2f56f70a7c5bd7c15ed6b19e0b1e5a0902a2
 }
