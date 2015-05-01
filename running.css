@@ -62,7 +62,7 @@ canvas {
 
 #leftControl, #rightControl, #leftControl2, #rightControl2 {
 	background-image: none; 
-	margin-bottom: 30px;
+	margin-bottom: 15px;
 	font-size: 300%;
 }
 
@@ -119,4 +119,8 @@ canvas {
 	margin-top: 10px;
 	padding-top: -50px;
 	height: 75px;
+}
+
+.toggled {
+	font-weight: bold; 
 }
