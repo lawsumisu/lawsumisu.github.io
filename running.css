@@ -27,10 +27,9 @@ canvas {
 }*/
 
 .carouselBread2 {
-	text-align: center; 
-	margin-bottom: -5px;
-	margin-top: 10px;
-	z-index: 10;
+	text-align: center;
+	position: relative;
+	margin-top: -25px;
 }
 
 .carousel {
