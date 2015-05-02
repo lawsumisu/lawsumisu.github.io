@@ -749,7 +749,7 @@ var Stopwatch  = function(){
 		var time = this.formatTimeWithMilliseconds(currentMilliseconds);
 
 		$("#fullTime").text(time);
-		$("#pauseHelpLabel1").text("Time: ");
+		$("#pauseHelpLabel1").text("Time");
 		$("#pauseLabel1").text(time);
 
 		//var stats = getCurrentStats(sec);
@@ -804,17 +804,17 @@ var Stopwatch  = function(){
 		}
 
 		$("#splitTime").text(splitTimeStr);
-		$("#pauseHelpLabel2").text('Split Time:');
+		$("#pauseHelpLabel2").text('Split Time');
 		$("#pauseLabel2").text(splitTimeStr);
 		//$("#pauseLabel2").innerHTML = "<span class = 'pauseHelpLabel'> Split Time: </span>" + splitTimeStr;
 		$("#timeDiff").text(diffStr);
-		$("#pauseHelpLabel3").text('Diff:');
+		$("#pauseHelpLabel3").text('Diff');
 		$("#pauseLabel3").text(diffStr);
 		$("#fullDist").text(distanceStr);
-		$("#pauseHelpLabel4").text('Distance:');
+		$("#pauseHelpLabel4").text('Distance');
 		$("#pauseLabel4").text(distanceStr);
 		$("#splitDist").text(splitDistStr);
-		$("#pauseHelpLabel5").text('Split Distance:');
+		$("#pauseHelpLabel5").text('Split Distance');
 		$("#pauseLabel5").text(splitDistStr);
 
 
