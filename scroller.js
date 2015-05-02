@@ -480,6 +480,8 @@ var clamp = function(value, min, max){
 }
 
 var setupCarousel = function(stats){
+	var topBreadCrumbs = []
+	var bottomBreadCrumbs = []
 	var carousel = $("#carousel");
 	var innerCarousel = $("<div>").addClass("carousel-inner");
 	//Set up full time div.
@@ -489,16 +491,23 @@ var setupCarousel = function(stats){
 	
 	innerCarousel.append(fullTime)
 	carousel.append(innerCarousel);
+	topBreadCrumbs.push('Time'); 
 
 	//Add split time and pacing diff info, but only if they are existent stats.
 	if (stats.splitTime != null){
 		var splitTime = $("<div class = item><h1 id = splitTime style = 'font-size:105%'></h1></div>");
 		innerCarousel.append(splitTime);
+
+		topBreadCrumbs.push('Split Time'); 
+
+		//add split time to array 
 	
 	}
 	if (stats.pacingDiff != null){
 		var timeDiff = $("<div class = item><h1 id = timeDiff style = 'font-size:105%'></h1></div>");
 		innerCarousel.append(timeDiff);
+
+		topBreadCrumbs.push('Diff'); 
 	}
 
 	if (innerCarousel.find("div").length > 1){
@@ -517,10 +526,12 @@ var setupCarousel = function(stats){
 	var fullDistance = $("<div class = 'item active'><h1 id = fullDist style = 'font-size:105%'></h1></div>");
 	innerCarousel2.append(fullDistance);
 	distanceCarousel.append(innerCarousel2);
+	bottomBreadCrumbs.push('Distance'); 
 
 	if (stats.pacingDiff != null){
 		var splitDistance = $("<div class = item><h1 id = splitDist style = 'font-size:105%'></h1></div>");
 		innerCarousel2.append(splitDistance);
+		bottomBreadCrumbs.push('Split Distance'); 
 		var leftArrow = $("<a href='#carousel2' id = 'leftControl2' class='left carousel-control' data-slide='prev'>"+
             				"<span class='glyphicon glyphicon-chevron-left'></span></a>");
 		var rightArrow = $("<a href='#carousel2' id = 'rightControl2' class='right carousel-control' data-slide='next'>"+
@@ -529,6 +540,32 @@ var setupCarousel = function(stats){
 		innerCarousel2.append(leftArrow).append(rightArrow);
 	}
 
+
+	//for loop to display the appropriate carousel breadcrumbs 
+
+	//topBreadCrumbs
+	topBreadString = ""; 
+	for (var i = 0; i < topBreadCrumbs.length; i++) {
+		topBreadString += topBreadCrumbs[i]
+
+		if (topBreadCrumbs[i+1] != null) {
+			topBreadString += " / "
+		}
+	}
+
+	$("#topCarouselBread").text(topBreadString); 
+
+	bottomBreadString = ""; 
+	
+	for (var i = 0; i < bottomBreadCrumbs.length; i++) {
+		bottomBreadString += bottomBreadCrumbs[i]
+
+		if (bottomBreadCrumbs[i+1] != null) {
+			bottomBreadString += " / "
+		}
+	}
+
+	$("#bottomCarouselBread").text(bottomBreadString); 
 
 }
 
