@@ -779,10 +779,10 @@ var Stopwatch  = function(){
 			//diffStr = getDifferentialGivenDiff(stats.pacingDiff);
 			var symbol;
 			if (stats.pacingDiff > 0) {
-				symbol = "+ ";
+				symbol = "+";
 			}
 			else {
-				symbol = "- ";
+				symbol = "-";
 			}
 			diffStr = symbol + this.formatTimeWithMilliseconds(Math.abs(stats.pacingDiff)*1000);
 

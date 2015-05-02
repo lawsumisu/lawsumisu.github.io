@@ -100,17 +100,11 @@ canvas {
 	font-size: 150%; 
 	text-align: left;
 	/*margin-left: 30%;*/
-	padding-left: 5%;
-	padding-right: 5%;
+	padding-right: 0%;
 	padding-top:25%;
 	padding-bottom: 15%;
 }
 
-#pauseLabel3 {
-	margin-left: -25%;
-	padding-right: 0%;
-	float: right;
-}
 
 .deficit {
 	color: red;
@@ -144,4 +138,8 @@ canvas {
 .negative {
 	color: red;
 
+}
+
+#pauseLabels {
+	margin-left: -5%;
 }
