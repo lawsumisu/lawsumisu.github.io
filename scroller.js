@@ -546,26 +546,30 @@ var setupCarousel = function(stats){
 	//topBreadCrumbs
 	topBreadString = ""; 
 	for (var i = 0; i < topBreadCrumbs.length; i++) {
-		topBreadString += topBreadCrumbs[i]
+		topBreadString += "<span id = " + topBreadCrumbs[i] + ">" + topBreadCrumbs[i] + "</span>"
 
 		if (topBreadCrumbs[i+1] != null) {
 			topBreadString += " / "
 		}
 	}
 
-	$("#topCarouselBread").text(topBreadString); 
+	$("#topCarouselBread").html(topBreadString); 
 
 	bottomBreadString = ""; 
 	
 	for (var i = 0; i < bottomBreadCrumbs.length; i++) {
-		bottomBreadString += bottomBreadCrumbs[i]
-
+		if (bottomBreadCrumbs[i] != "Split Distance") {
+			bottomBreadString += "<span id = " + bottomBreadCrumbs[i] + ">" + bottomBreadCrumbs[i] + "</span>"
+		} else {
+			bottomBreadString += "<span id = SplitDistance>" + bottomBreadCrumbs[i] + "</span>"
+		}
+		
 		if (bottomBreadCrumbs[i+1] != null) {
 			bottomBreadString += " / "
 		}
 	}
 
-	$("#bottomCarouselBread").text(bottomBreadString); 
+	$("#bottomCarouselBread").html(bottomBreadString); 
 
 }
 
@@ -767,7 +771,41 @@ var Stopwatch  = function(){
 
 
 		//redraw the dynamic triangle based on the times.
-		drawActiveTriangle(stats.pacingDiff); 
+		drawActiveTriangle(stats.pacingDiff);
+
+		//console.log($("fullTime")); 
+
+		//update the carousel breadcrumbs 
+		if ($("#fullTime").parent().hasClass('active')) {
+			$("#Time").addClass('toggled'); 
+		} else {
+			$("#Time").removeClass('toggled'); 
+		}
+
+		if ($("#splitTime").parent().hasClass('active')) {
+			$("#Split").addClass('toggled'); 
+		} else {
+			$("#Split").removeClass('toggled'); 
+		}
+
+		if ($("#timeDiff").parent().hasClass('active')) {
+			$("#Diff").addClass('toggled'); 
+		} else {
+			$("#Diff").removeClass('toggled'); 
+		}
+
+		if ($("#fullDist").parent().hasClass('active')) {
+			$("#Distance").addClass('toggled'); 
+		} else {
+			$("#Distance").removeClass('toggled'); 
+		}
+
+		if ($("#splitDist").parent().hasClass('active')) {
+			$("#SplitDistance").addClass('toggled'); 
+		} else {
+			$("#SplitDistance").removeClass('toggled'); 
+		}
+
 
 	}
 }
