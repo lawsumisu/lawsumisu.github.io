@@ -750,9 +750,24 @@ var Stopwatch  = function(){
 		var diffStr;
 		if (!stats.pacingDiff) {
 			diffStr = "none";
-		}
-		else {
+		} else {
 			diffStr = getDifferentialGivenDiff(stats.pacingDiff);
+
+			if (stats.pacingDiff > 0) {
+
+				$("#timeDiff").removeClass('positive'); 
+				$("#timeDiff").addClass('negative'); 
+
+				$("#pauseLabel3").removeClass('positive'); 
+				$("#pauseLabel3").addClass('negative'); 
+				
+			} else {
+				$("#timeDiff").removeClass('negative'); 
+				$("#timeDiff").addClass('positive'); 
+
+				$("#pauseLabel3").removeClass('negative'); 
+				$("#pauseLabel3").addClass('positive'); 
+			}
 		}
 
 		$("#splitTime").text(splitTimeStr);
@@ -805,6 +820,9 @@ var Stopwatch  = function(){
 		} else {
 			$("#SplitDistance").removeClass('toggled'); 
 		}
+
+		//modify positive or negative splitDistance colors
+
 
 
 	}
