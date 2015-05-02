@@ -225,6 +225,7 @@
     <script type="text/javascript" src="external_js/highcharts.js"></script>
     <script type="text/javascript" src="runs.js"></script>
     <script type="text/javascript" src="stop.js"></script>
+    <script type="text/javascript" src="external_js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript">
       //resizing pictures of arrows
       // document.getElementById("arrow").style.width = $(window).width().toString() + "px"; 
@@ -481,6 +482,28 @@
         $('a[href="#graphDisplay"]').tab('show');
         loadGraph();
       }
+
+      //swipe support for carousels
+      $(document).ready(function() {  
+        $("#carousel").swiperight(function() {  
+          $("#carousel").carousel('prev');  
+        });  
+        
+        $("#carousel").swipeleft(function() {  
+          $("#carousel").carousel('next');  
+        });  
+
+        $("#carousel2").swiperight(function() {  
+          $("#carousel2").carousel('prev');  
+        });  
+        
+        $("#carousel2").swipeleft(function() {  
+          $("#carousel2").carousel('next');  
+        });  
+      });
+
+      $.mobile.loading().hide(); //remove loading message
+
     </script>
   </body>
 </html>
