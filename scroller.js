@@ -719,7 +719,7 @@ var Stopwatch  = function(){
 		$("#pauseLabel2").text(splitTimeStr);
 		//$("#pauseLabel2").innerHTML = "<span class = 'pauseHelpLabel'> Split Time: </span>" + splitTimeStr;
 		$("#timeDiff").text(diffStr);
-		$("#pauseHelpLabel3").text('Delta:');
+		$("#pauseHelpLabel3").text('Diff:');
 		$("#pauseLabel3").text(diffStr);
 		$("#fullDist").text(distanceStr);
 		$("#pauseHelpLabel4").text('Distance:');
