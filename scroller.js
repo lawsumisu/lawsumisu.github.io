@@ -485,7 +485,7 @@ var setupCarousel = function(stats){
 	var carousel = $("#carousel");
 	var innerCarousel = $("<div>").addClass("carousel-inner");
 	//Set up full time div.
-	var fullTime = $("<div><h1 id = fullTime style = 'font-size:105%'></h1></div>");
+	var fullTime = $("<div><h1 id = fullTime style = 'font-size:100%'></h1></div>");
 	fullTime.addClass("item active");
 	//Set up split time div and inner header
 	
@@ -495,7 +495,7 @@ var setupCarousel = function(stats){
 
 	//Add split time and pacing diff info, but only if they are existent stats.
 	if (stats.splitTime != null){
-		var splitTime = $("<div class = item><h1 id = splitTime style = 'font-size:105%'></h1></div>");
+		var splitTime = $("<div class = item><h1 id = splitTime style = 'font-size:100%'></h1></div>");
 		innerCarousel.append(splitTime);
 
 		topBreadCrumbs.push('Split Time'); 
@@ -504,7 +504,7 @@ var setupCarousel = function(stats){
 	
 	}
 	if (stats.pacingDiff != null){
-		var timeDiff = $("<div class = item><h1 id = timeDiff style = 'font-size:105%'></h1></div>");
+		var timeDiff = $("<div class = item><h1 id = timeDiff style = 'font-size:100%'></h1></div>");
 		innerCarousel.append(timeDiff);
 
 		topBreadCrumbs.push('Diff'); 
@@ -523,13 +523,13 @@ var setupCarousel = function(stats){
 	//Now, set up the distance carousel.
 	var distanceCarousel = $("#carousel2");
 	var innerCarousel2 = $("<div>").addClass("carousel-inner");
-	var fullDistance = $("<div class = 'item active'><h1 id = fullDist style = 'font-size:105%'></h1></div>");
+	var fullDistance = $("<div class = 'item active'><h1 id = fullDist style = 'font-size:100%'></h1></div>");
 	innerCarousel2.append(fullDistance);
 	distanceCarousel.append(innerCarousel2);
 	bottomBreadCrumbs.push('Distance'); 
 
 	if (stats.pacingDiff != null){
-		var splitDistance = $("<div class = item><h1 id = splitDist style = 'font-size:105%'></h1></div>");
+		var splitDistance = $("<div class = item><h1 id = splitDist style = 'font-size:100%'></h1></div>");
 		innerCarousel2.append(splitDistance);
 		bottomBreadCrumbs.push('Split Distance'); 
 		var leftArrow = $("<a href='#carousel2' id = 'leftControl2' class='left carousel-control' data-slide='prev'>"+
@@ -721,37 +721,70 @@ var Stopwatch  = function(){
 		pause = false;
 	}
 
+	this.formatTimeWithMilliseconds = function(milliseconds) {
+		var hsec = Math.floor(milliseconds/10);
+		var sec  = Math.floor(hsec/100);
+		var min = Math.floor(sec/60);
+
+		var time = "";
+		time += zeroPad(min, 2) +":" + zeroPad(sec%60, 2) + "." + zeroPad(hsec%100, 2);
+		return time;
+	}
+
+	this.formatDistance = function(distance) {
+		var truncated = Math.floor(distance*100)/100;
+		return truncated.toFixed(2) + " mi";
+	}
+
 	this.update = function(){
+		/*
 		var hsec = Math.floor(this.elapsedTime()/10);
 		var sec  = Math.floor(hsec/100);
 		var min = Math.floor(sec/60);
 		var time = "";
 		time += zeroPad(min, 2) +":" + zeroPad(sec%60, 2) + "." + zeroPad(hsec%100, 2);
+		*/
+
+		var currentMilliseconds = this.elapsedTime();
+		var time = this.formatTimeWithMilliseconds(currentMilliseconds);
+
 		$("#fullTime").text(time);
 		$("#pauseHelpLabel1").text("Time: ");
 		$("#pauseLabel1").text(time);
 
-		var stats = getCurrentStats(sec);
-		var distanceStr = (stats.distance).toFixed(2) + " mi";
+		//var stats = getCurrentStats(sec);
+		var stats = getCurrentStats(currentMilliseconds/1000);
+		//var distanceStr = (stats.distance).toFixed(2) + " mi";
+		var distanceStr = this.formatDistance(stats.distance);
 		var splitDistStr;
 		if (!stats.splitDistance) {
 			splitDistStr = "none";
 		}
 		else {
-			splitDistStr = (stats.splitDistance).toFixed(2) + " mi";
+			splitDistStr = this.formatDistance(stats.splitDistance);
+			//splitDistStr = (stats.splitDistance).toFixed(2) + " mi";
 		}
 		var splitTimeStr;
 		if (!stats.splitTime) {
 			splitTimeStr = "none";
 		}
 		else {
-			splitTimeStr = formatTime(stats.splitTime);
+			//splitTimeStr = formatTime(stats.splitTime);
+			splitTimeStr = this.formatTimeWithMilliseconds(stats.splitTime*1000);
 		}
 		var diffStr;
 		if (!stats.pacingDiff) {
 			diffStr = "none";
 		} else {
-			diffStr = getDifferentialGivenDiff(stats.pacingDiff);
+			//diffStr = getDifferentialGivenDiff(stats.pacingDiff);
+			var symbol;
+			if (stats.pacingDiff > 0) {
+				symbol = "+ ";
+			}
+			else {
+				symbol = "- ";
+			}
+			diffStr = symbol + this.formatTimeWithMilliseconds(Math.abs(stats.pacingDiff)*1000);
 
 			if (stats.pacingDiff > 0) {
 

@@ -63,7 +63,7 @@ canvas {
 
 #leftControl, #rightControl, #leftControl2, #rightControl2 {
 	background-image: none; 
-	margin-bottom: 15px;
+	margin-bottom: 20px;
 	font-size: 300%;
 }
 
@@ -106,6 +106,11 @@ canvas {
 	padding-bottom: 15%;
 }
 
+#pauseLabel3 {
+	margin-left: -25%;
+	padding-right: 0%;
+	float: right;
+}
 
 .deficit {
 	color: red;
