@@ -347,8 +347,6 @@ var setThumbColor = function(ctx, isHighlighted){
 		g += 64;
 		b += 64;
 	}
-
-	console.log("rgb(" + r + "," + g + "," + b + ")");
 	ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
 
 }
