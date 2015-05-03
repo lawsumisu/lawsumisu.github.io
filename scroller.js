@@ -90,7 +90,16 @@ var drawActiveTriangle = function(splitTime) {
 	//console.log(normalizedSplitTime); 
 
 	var canvas = document.getElementById("canvas");
-    var context = canvas.getContext("2d");
+    var context = canvas.getContext("2d"); 
+    context.clearRect(0, 0, canvas.width, canvas.height); 
+    context.fillStyle="#D3D3D3";
+    context.beginPath();
+    context.moveTo(100,100);
+    context.lineTo(190,0);
+    context.lineTo(280,100);
+    context.lineTo(190,200);
+    context.closePath();
+    context.fill();
 
     if (normalizedSplitTime > 0) {
     	context.fillStyle="red";
@@ -113,6 +122,16 @@ var drawActiveTriangle = function(splitTime) {
 
     var canvas = document.getElementById("canvas2");
     var context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle="#D3D3D3";
+    context.beginPath();
+    context.moveTo(50,150);
+    context.lineTo(190,0);
+    context.lineTo(330,150);
+    context.lineTo(190,300);
+    context.closePath();
+    context.fill();
+
 
     if (normalizedSplitTime > 0) {
     	context.fillStyle="red";
