@@ -346,7 +346,7 @@ var setThumbColor = function(ctx, isHighlighted){
 
 	var r = 110;
 	var g = 207;
-	var b = 143;
+	var b = 78;
 	if (currentState == "pause"){
 		r = 211;
 		g = 211;
