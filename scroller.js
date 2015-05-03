@@ -59,10 +59,17 @@ var setup = function(state){
 	scrollData = {pathBezier: B, thumbRadius: r*1.5};
 }
 
+/**
+ * Auto resumes the stopwatch and redraws that thumb position.
+ * This only occurs if the current state == "stop".
+ * @return {[type]} [description]
+ */
 var resume = function(){
-	currentState = "go";
-	stopwatch.go();
-	drawThumbAtT(scrollData.pathBezier, 0, scrollData.thumbRadius, false);
+	if (currentState == "stop"){
+		currentState = "go";
+		stopwatch.go();
+		drawThumbAtT(scrollData.pathBezier, 0, scrollData.thumbRadius, false);
+	}
 }
 /**
  * Draws dynamic triangle
