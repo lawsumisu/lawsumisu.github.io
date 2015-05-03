@@ -330,7 +330,7 @@
             var beta = event.beta;
             var gamma = event.gamma;
 
-            if ((beta > -80 && beta <= -50)) {
+            if ((beta > -80 && beta <= -50 && currentState != "pause")) {
               $("#runningScreen").css("display", "block");
               $("#stopScreen").css("display", "none");
               $("#pauseScreen").css("display", "none");
@@ -346,7 +346,7 @@
               document.getElementById("canvas").style.display = "none";  
               document.getElementById("canvas2").style.display = "inline";  
             } 
-            else if ((beta > -60 && beta <= -20)) {
+            else if ((beta > -60 && beta <= -20 && currentState != "pause")) {
 
               $("#runningScreen").css("display", "block");
               $("#stopScreen").css("display", "none");
