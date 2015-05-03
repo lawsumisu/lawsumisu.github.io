@@ -1,5 +1,6 @@
 //Javascript for scroll bar here!
 var scrollT = 0;
+var scrollData = null;
 
 var cachedWidth = 0;
 var cachedHeight = 0;
@@ -54,8 +55,15 @@ var setup = function(state){
 	var stats = getCurrentStats(0);
 	setupCarousel(stats);
 	setupPauseScreen(stats);
+
+	scrollData = {pathBezier: B, thumbRadius: r*1.5};
 }
 
+var resume = function(){
+	currentState = "go";
+	stopwatch.go();
+	drawThumbAtT(scrollData.pathBezier, 0, scrollData.thumbRadius, false);
+}
 /**
  * Draws dynamic triangle
  */
@@ -419,7 +427,7 @@ var displayText = function(state, ctx, title, position, textSize, color){
  */
 var animateThumb = function(x, y, B, radius){
 	var t = B.getT(new Point(x,y));
-	var delta = -.01;
+	var delta = -.02;
 	if (t > .5){
 		delta *= -1;
 	}
